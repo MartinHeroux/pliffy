@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 
-from pliffy import plot
+from pliffy import blocks
 from pliffy.estimate import Estimates
 
 
@@ -27,7 +27,7 @@ def data_a():
 @pytest.fixture()
 def pliffy_data_paired():
     random.seed(42)
-    return plot.PliffyData(
+    return blocks.PliffyData(
         a=[random.random() * 100 for _ in range(30)],
         b=[random.random() * 100 for _ in range(30)],
         design="paired",
@@ -37,7 +37,7 @@ def pliffy_data_paired():
 @pytest.fixture()
 def pliffy_data_paired_short():
     random.seed(42)
-    return plot.PliffyData(
+    return blocks.PliffyData(
         a=[random.random() * 100 for _ in range(5)],
         b=[random.random() * 100 for _ in range(5)],
         design="paired",
@@ -47,7 +47,7 @@ def pliffy_data_paired_short():
 @pytest.fixture()
 def pliffy_data_unpaired():
     random.seed(73)
-    return plot.PliffyData(
+    return blocks.PliffyData(
         a=[random.random() * 100 for _ in range(30)],
         b=[random.random() * 100 for _ in range(20)],
     )
@@ -65,13 +65,13 @@ def estimates_b():
 
 @pytest.fixture()
 def pliffy_data_bad_design():
-    return plot.PliffyData(a=[3], b=[6], design='not_possible')
+    return blocks.PliffyData(a=[3], b=[6], design='not_possible')
 
 
 @pytest.fixture()
 def pliffy_data_unpaired_data_paired_design():
     random.seed(73)
-    return plot.PliffyData(
+    return blocks.PliffyData(
         a=[random.random() * 100 for _ in range(30)],
         b=[random.random() * 100 for _ in range(20)],
         design='paired'

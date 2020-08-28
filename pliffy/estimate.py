@@ -3,10 +3,10 @@ from typing import NamedTuple, Tuple, Union, List
 from scipy.stats import t
 import numpy as np
 
-from pliffy import plot
+from pliffy import blocks
 
 
-def calc(pliffy_data: plot.PliffyData) -> Tuple["Estmates", Union[list, None]]:
+def calc(pliffy_data: blocks.PliffyData) -> "Estmates":
     """Calculate mean difference and confidence interval
 
     Parameters
@@ -18,9 +18,6 @@ def calc(pliffy_data: plot.PliffyData) -> Tuple["Estmates", Union[list, None]]:
             Second set of data
         design
             Flag to identify if data `a` and `b` are `paired` or `unpaired`
-        measure_units
-            Identifies the measure and units of data `a` and `b`.
-            Example: "Torque (Nm)" or "amplitude (Volts)"
         ci_percentage
             Desired confidence interval.
             Example: 95 or 99
@@ -31,16 +28,15 @@ def calc(pliffy_data: plot.PliffyData) -> Tuple["Estmates", Union[list, None]]:
         )
     estimates_a, estimates_b = _calc_means_and_confidence_intervals(pliffy_data)
     estimates_diff = None
-    diff_vals = None
     if pliffy_data.design == "unpaired":
         estimates_diff = _unpaired_diff_mean_and_confidence_interval(
             pliffy_data, estimates_a, estimates_b
         )
     if pliffy_data.design == "paired":
-        estimates_diff, diff_vals = _paired_diff_mean_and_confidence_interval(
+        estimates_diff = _paired_diff_mean_and_confidence_interval(
             pliffy_data
         )
-    return estimates_diff, diff_vals
+    return estimates_diff
 
 
 class Estimates(NamedTuple):
@@ -85,7 +81,7 @@ def _t_value(ci: int, degrees_of_freedom: int):
 
 
 def _unpaired_diff_mean_and_confidence_interval(
-    pliffy_data: plot.PliffyData, estimates_a: "Estimates", estimates_b: "Estimates"
+    pliffy_data: blocks.PliffyData, estimates_a: "Estimates", estimates_b: "Estimates"
 ) -> "Estimates":
     """Calculate mean difference of confidence interval of the mean difference
 
@@ -107,7 +103,7 @@ def _unpaired_diff_mean_and_confidence_interval(
     return Estimates(mean=diff_mean, ci=diff_ci_vals)
 
 
-def _data_len(pliffy_data: plot.PliffyData) -> Tuple[int, int]:
+def _data_len(pliffy_data: blocks.PliffyData) -> Tuple[int, int]:
     """Determine length of data `a` and `b`"""
     return len(pliffy_data.a), len(pliffy_data.b)
 
@@ -118,7 +114,7 @@ def _weighted_sd(data: List[float]) -> float:
 
 
 def _paired_diff_mean_and_confidence_interval(
-    pliffy_data: plot.PliffyData,
+    pliffy_data: blocks.PliffyData,
 ) -> Tuple["Estimates", List[float]]:
     """Calculate mean difference of confidence interval of the mean difference"""
     len_a, len_b = _data_len(pliffy_data)
@@ -130,7 +126,7 @@ def _paired_diff_mean_and_confidence_interval(
     estimates_diff = _calc_mean_and_confidence_interval(
         diff_vals, pliffy_data.ci_percentage
     )
-    return estimates_diff, diff_vals
+    return estimates_diff
 
 
 def _paired_diffs(pliffy_data):
