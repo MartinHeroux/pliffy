@@ -83,13 +83,12 @@ def test_calc_means_and_confidence_intervals_unpaired(pliffy_data_unpaired):
 
 
 def test_paired_diff_mean_and_confidence_interval(pliffy_data_paired_short):
-    estimates_diff, diff_vals = estimate._paired_diff_mean_and_confidence_interval(
+    estimates_diff = estimate._paired_diff_mean_and_confidence_interval(
         pliffy_data_paired_short
     )
     assert (estimates_diff.mean, estimates_diff.ci[0], estimates_diff.ci[1]) == approx(
         (4.167762, -54.875948, 63.211472)
     )
-    assert diff_vals == approx([3.727268, 86.716881, -18.809048, 19.871108, -70.667399])
 
 
 def test_paired_diffs(pliffy_data_paired_short):
