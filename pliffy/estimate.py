@@ -36,7 +36,7 @@ def calc(pliffy_data: blocks.PliffyData) -> "Estmates":
         estimates_diff = _paired_diff_mean_and_confidence_interval(
             pliffy_data
         )
-    return estimates_diff
+    return estimates_a, estimates_b, estimates_diff
 
 
 class Estimates(NamedTuple):
@@ -136,5 +136,4 @@ def _paired_diffs(pliffy_data):
 
 class UnequalLength(Exception):
     """Custom exception for paired analysis when data_a/data_b not same length"""
-
     pass
