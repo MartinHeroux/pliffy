@@ -6,7 +6,7 @@ import numpy as np
 from pliffy import blocks
 
 
-def calc(pliffy_data: blocks.PliffyData) -> "Estmates":
+def calc(pliffy_data: "blocks.PliffyData") -> "Estmates":
     """Calculate mean difference and confidence interval
 
     Parameters
@@ -81,7 +81,7 @@ def _t_value(ci: int, degrees_of_freedom: int):
 
 
 def _unpaired_diff_mean_and_confidence_interval(
-    pliffy_data: blocks.PliffyData, estimates_a: "Estimates", estimates_b: "Estimates"
+    pliffy_data: "blocks.PliffyData", estimates_a: "Estimates", estimates_b: "Estimates"
 ) -> "Estimates":
     """Calculate mean difference of confidence interval of the mean difference
 
@@ -103,7 +103,7 @@ def _unpaired_diff_mean_and_confidence_interval(
     return Estimates(mean=diff_mean, ci=diff_ci_vals)
 
 
-def _data_len(pliffy_data: blocks.PliffyData) -> Tuple[int, int]:
+def _data_len(pliffy_data: "blocks.PliffyData") -> Tuple[int, int]:
     """Determine length of data `a` and `b`"""
     return len(pliffy_data.a), len(pliffy_data.b)
 
@@ -114,7 +114,7 @@ def _weighted_sd(data: List[float]) -> float:
 
 
 def _paired_diff_mean_and_confidence_interval(
-    pliffy_data: blocks.PliffyData,
+    pliffy_data: "blocks.PliffyData",
 ) -> Tuple["Estimates", List[float]]:
     """Calculate mean difference of confidence interval of the mean difference"""
     len_a, len_b = _data_len(pliffy_data)
