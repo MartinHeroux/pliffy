@@ -32,7 +32,6 @@ class PlotInfo(NamedTuple):
     paired_data_line_width: int = 1
     paired_data_line_color: str = "gainsboro"
     ci_line_width: ABD = ABD(a=1, b=1, diff=1)
-    x_values: ABD = ABD(a=1, b=2, diff=2.5)
     horiz_line_to_diffs: bool = False
     join_ab_means: bool = True
     ax1_y_range: Tuple = None
