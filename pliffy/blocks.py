@@ -41,6 +41,7 @@ class PlotInfo(NamedTuple):
     ab_sub_label: str = None
     bottom_box: bool = False
     alpha: float = 0.2
+    font_size: int = 9
 
 
 class PliffyData(NamedTuple):
