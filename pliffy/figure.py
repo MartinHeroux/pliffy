@@ -160,6 +160,26 @@ class Figure:
         self.ax_ab.set_yticks(self.y_ticks_adjusted)
 
     def _plot_diff(self):
+        self._determine_float_axis()
+
+        self.ax_diff.plot(0.3, self.estimates.diff.mean, "^k", markersize=6)
+        self.ax_diff.plot([0.3, 0.3], [self.estimates.diff.ci[0], self.estimates.diff.ci[1]], "-k", linewidth=1)
+        self.ax_diff.plot([0, 0.5], [0, 0], '--', color='grey', linewidth=1)
+        self.ax_diff.tick_params(
+            axis="y",
+            which="both",
+            left=False,
+            right=True,
+            labelleft=False,
+            labelright=True,
+        )
+        self.ax_diff.spines["top"].set_visible(False)
+        self.ax_diff.spines["bottom"].set_visible(False)
+        self.ax_diff.spines["left"].set_visible(False)
+        self.ax_diff.xaxis.set_ticks([])
+        self.ax_diff.xaxis.set_ticklabels([])
+
+    def _determine_float_axis(self):
         # Currently for summary_data only
 
         if self.estimates.diff.mean <= 0:
@@ -183,30 +203,15 @@ class Figure:
             y_tick_count_top += 1
 
         diff_axis_y_bottom_left_corner = self.y_ticks_adjusted[0] + (
-            (self.estimates.a.mean - (y_tick_count_bottom * self.ab_ytick_step))
-            - self.y_ticks_adjusted[0]
+                (self.estimates.a.mean - (y_tick_count_bottom * self.ab_ytick_step))
+                - self.y_ticks_adjusted[0]
         )
 
-        y_ticks = list(np.arange(-y_tick_count_bottom*self.ab_ytick_step, self.ab_ytick_step*y_tick_count_top, self.ab_ytick_step))
+        y_ticks = list(np.arange(-y_tick_count_bottom * self.ab_ytick_step,
+                                 self.ab_ytick_step * y_tick_count_top, self.ab_ytick_step))
         self.ax_diff = self.ax_ab.inset_axes(
             [2.5, diff_axis_y_bottom_left_corner, 0.5, y_ticks[-1] - y_ticks[0]],
             transform=self.ax_ab.transData,
         )
         self.ax_diff.set_yticks(y_ticks)
         self.ax_diff.set_ylim((y_ticks[0], y_ticks[-1]))
-        self.ax_diff.plot(0.3, self.estimates.diff.mean, "^k", markersize=6)
-        self.ax_diff.plot([0.3, 0.3], [self.estimates.diff.ci[0], self.estimates.diff.ci[1]], "-k", linewidth=1)
-        self.ax_diff.plot([0, 0.5], [0, 0], '--', color='grey', linewidth=1)
-        self.ax_diff.tick_params(
-            axis="y",
-            which="both",
-            left=False,
-            right=True,
-            labelleft=False,
-            labelright=True,
-        )
-        self.ax_diff.spines["top"].set_visible(False)
-        self.ax_diff.spines["bottom"].set_visible(False)
-        self.ax_diff.spines["left"].set_visible(False)
-        self.ax_diff.xaxis.set_ticks([])
-        self.ax_diff.xaxis.set_ticklabels([])
