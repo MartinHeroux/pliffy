@@ -4,16 +4,14 @@ import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
 
-from pliffy import estimate, blocks
-
-matplotlib.rcParams.update({"font.size": 9})
-
+from pliffy import blocks
 
 X_VALS = blocks.ABD(a=1, b=2, diff=2.8)
 
 
 class Figure:
     def __init__(self, pliffy_data, plot_info, estimates, ax_ab):
+        matplotlib.rcParams.update({"font.size": plot_info.font_size})
         self.pliffy_data = pliffy_data
         self.plot_info = plot_info
         self.estimates = estimates
@@ -180,38 +178,51 @@ class Figure:
         self.ax_diff.xaxis.set_ticklabels([])
 
     def _determine_float_axis(self):
-        # Currently for summary_data only
+        num_y_ticks_below_zero, num_y_ticks_above_zero = self._determine_num_y_ticks_above_below_zero()
 
-        if self.estimates.diff.mean <= 0:
-            bottom_limit = self.estimates.diff.ci[0]
-            bottom_included = True
-            y_tick_count_bottom = 1
-            while bottom_included:
-                if (y_tick_count_bottom * -self.ab_ytick_step) > bottom_limit:
-                    y_tick_count_bottom += 1
-                else:
-                    break
-
-            top_limit = self.estimates.diff.ci[1]
-            top_included = True
-            y_tick_count_top = 0
-            while top_included:
-                if (y_tick_count_top * self.ab_ytick_step) < top_limit:
-                    y_tick_count_top += 1
-                else:
-                    break
-            y_tick_count_top += 1
-
-        diff_axis_y_bottom_left_corner = self.y_ticks_adjusted[0] + (
-                (self.estimates.a.mean - (y_tick_count_bottom * self.ab_ytick_step))
+        bottom_left_corner_diff_axis_y_coord = self.y_ticks_adjusted[0] + (
+                (self.estimates.a.mean - (num_y_ticks_below_zero * self.ab_ytick_step))
                 - self.y_ticks_adjusted[0]
         )
 
-        y_ticks = list(np.arange(-y_tick_count_bottom * self.ab_ytick_step,
-                                 self.ab_ytick_step * y_tick_count_top, self.ab_ytick_step))
+        y_ticks = list(np.arange(-num_y_ticks_below_zero * self.ab_ytick_step,
+                                 self.ab_ytick_step * num_y_ticks_above_zero, self.ab_ytick_step))
         self.ax_diff = self.ax_ab.inset_axes(
-            [2.5, diff_axis_y_bottom_left_corner, 0.5, y_ticks[-1] - y_ticks[0]],
+            [2.5, bottom_left_corner_diff_axis_y_coord, 0.5, y_ticks[-1] - y_ticks[0]],
             transform=self.ax_ab.transData,
         )
         self.ax_diff.set_yticks(y_ticks)
         self.ax_diff.set_ylim((y_ticks[0], y_ticks[-1]))
+
+    def _determine_num_y_ticks_above_below_zero(self):
+        num_y_ticks_below_zero = self._determine_num_y_ticks_below_zero()
+        num_y_ticks_above_zero = self._determine_num_y_ticks_above_zero()
+        return num_y_ticks_below_zero, num_y_ticks_above_zero
+
+    def _determine_num_y_ticks_below_zero(self):
+        bottom_limit = self.estimates.diff.ci[0]
+        bottom_included = True
+        num_y_ticks_below_zero = 0
+        while bottom_included:
+            if (num_y_ticks_below_zero * -self.ab_ytick_step) > bottom_limit:
+                num_y_ticks_below_zero += 1
+            else:
+                break
+        if (self.estimates.a.mean - self.estimates.b.mean) < 0:
+            num_y_ticks_below_zero += 1
+        return num_y_ticks_below_zero
+
+    def _determine_num_y_ticks_above_zero(self):
+        top_limit = self.estimates.diff.ci[1]
+        top_included = True
+        num_y_ticks_above_zero = 0
+        while top_included:
+            if (num_y_ticks_above_zero * self.ab_ytick_step) < top_limit:
+                num_y_ticks_above_zero += 1
+            else:
+                break
+        if (self.estimates.a.mean - self.estimates.b.mean) >= 0:
+            num_y_ticks_above_zero += 1
+        return num_y_ticks_above_zero
+
+
