@@ -11,5 +11,6 @@ def plot(pliffy_data: blocks.PliffyData, plot_info: blocks.PlotInfo = blocks.Plo
     estimates = blocks.ABD(a=estimates_a, b=estimates_b, diff=estimates_diff)
     #TODO: print to screen and save to file all estimates
     figure.Figure(pliffy_data, plot_info, estimates, ax)
+    return estimates
 
 

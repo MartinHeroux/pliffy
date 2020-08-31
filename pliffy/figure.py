@@ -2,6 +2,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import matplotlib
+import numpy as np
 
 from pliffy import estimate, blocks
 
@@ -21,6 +22,12 @@ class Figure:
         self.ax_ab = ax_ab
         self.jitter = 0.05 / max([len(self.pliffy_data.a), len(self.pliffy_data.b)])
         self._plot_ab()
+        self._plot_diff()
+        if self.plot_info.save:
+            plot_name = self.plot_info.plot_name + ".png"
+            fig_path = Path(self.plot_info.save_path) / plot_name
+            plt.savefig(fig_path)
+        plt.show()
 
     def _make_figure_axis(self):
         width_height_in_inches = (8.2 / 2.54, 8.2 / 2.54)
@@ -36,12 +43,6 @@ class Figure:
         self._plot_ab_cis()
         self._tweak_ab_xaxis()
         self._tweak_ab_yaxis()
-
-        if self.plot_info.save:
-            plot_name = self.plot_info.plot_name + ".png"
-            fig_path = Path(self.plot_info.save_path) / plot_name
-            plt.savefig(fig_path)
-        plt.show()
 
     def _plot_raw_data(self):
         if (
@@ -142,6 +143,7 @@ class Figure:
         max_past_highest_ytick = ab_yticks[-1] < max(
             max(self.pliffy_data.a), max(self.pliffy_data.b)
         )
+        y_ticks_adjusted = list()
         if min_past_lowest_ytick and max_past_highest_ytick:
             y_ticks_adjusted = (
                 [ab_yticks[0] - self.ab_ytick_step]
@@ -154,4 +156,57 @@ class Figure:
             y_ticks_adjusted = list(ab_yticks) + [ab_yticks[-1] + self.ab_ytick_step]
         if not min_past_lowest_ytick and not max_past_highest_ytick:
             y_ticks_adjusted = list(ab_yticks)
-        self.ax_ab.set_yticks(y_ticks_adjusted)
+        self.y_ticks_adjusted = y_ticks_adjusted
+        self.ax_ab.set_yticks(self.y_ticks_adjusted)
+
+    def _plot_diff(self):
+        # Currently for summary_data only
+
+        if self.estimates.diff.mean <= 0:
+            bottom_limit = self.estimates.diff.ci[0]
+            bottom_included = True
+            y_tick_count_bottom = 1
+            while bottom_included:
+                if (y_tick_count_bottom * -self.ab_ytick_step) > bottom_limit:
+                    y_tick_count_bottom += 1
+                else:
+                    break
+
+            top_limit = self.estimates.diff.ci[1]
+            top_included = True
+            y_tick_count_top = 0
+            while top_included:
+                if (y_tick_count_top * self.ab_ytick_step) < top_limit:
+                    y_tick_count_top += 1
+                else:
+                    break
+            y_tick_count_top += 1
+
+        diff_axis_y_bottom_left_corner = self.y_ticks_adjusted[0] + (
+            (self.estimates.a.mean - (y_tick_count_bottom * self.ab_ytick_step))
+            - self.y_ticks_adjusted[0]
+        )
+
+        y_ticks = list(np.arange(-y_tick_count_bottom*self.ab_ytick_step, self.ab_ytick_step*y_tick_count_top, self.ab_ytick_step))
+        self.ax_diff = self.ax_ab.inset_axes(
+            [2.5, diff_axis_y_bottom_left_corner, 0.5, y_ticks[-1] - y_ticks[0]],
+            transform=self.ax_ab.transData,
+        )
+        self.ax_diff.set_yticks(y_ticks)
+        self.ax_diff.set_ylim((y_ticks[0], y_ticks[-1]))
+        self.ax_diff.plot(0.3, self.estimates.diff.mean, "^k", markersize=6)
+        self.ax_diff.plot([0.3, 0.3], [self.estimates.diff.ci[0], self.estimates.diff.ci[1]], "-k", linewidth=1)
+        self.ax_diff.plot([0, 0.5], [0, 0], '--', color='grey', linewidth=1)
+        self.ax_diff.tick_params(
+            axis="y",
+            which="both",
+            left=False,
+            right=True,
+            labelleft=False,
+            labelright=True,
+        )
+        self.ax_diff.spines["top"].set_visible(False)
+        self.ax_diff.spines["bottom"].set_visible(False)
+        self.ax_diff.spines["left"].set_visible(False)
+        self.ax_diff.xaxis.set_ticks([])
+        self.ax_diff.xaxis.set_ticklabels([])
