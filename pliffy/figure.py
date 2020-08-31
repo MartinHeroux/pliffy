@@ -161,8 +161,13 @@ class Figure:
         self._determine_float_axis()
 
         self.ax_diff.plot(0.3, self.estimates.diff.mean, "^k", markersize=6)
-        self.ax_diff.plot([0.3, 0.3], [self.estimates.diff.ci[0], self.estimates.diff.ci[1]], "-k", linewidth=1)
-        self.ax_diff.plot([0, 0.5], [0, 0], '--', color='grey', linewidth=1)
+        self.ax_diff.plot(
+            [0.3, 0.3],
+            [self.estimates.diff.ci[0], self.estimates.diff.ci[1]],
+            "-k",
+            linewidth=1,
+        )
+        self.ax_diff.plot([0, 0.5], [0, 0], "--", color="grey", linewidth=1)
         self.ax_diff.tick_params(
             axis="y",
             which="both",
@@ -178,17 +183,44 @@ class Figure:
         self.ax_diff.xaxis.set_ticklabels([])
 
     def _determine_float_axis(self):
-        num_y_ticks_below_zero, num_y_ticks_above_zero = self._determine_num_y_ticks_above_below_zero()
+        """
 
-        bottom_left_corner_diff_axis_y_coord = self.y_ticks_adjusted[0] + (
-                (self.estimates.a.mean - (num_y_ticks_below_zero * self.ab_ytick_step))
-                - self.y_ticks_adjusted[0]
+        diff axis is create by specifying x, y, width, height.
+            - x, y: coordinates of the bottom-left corner of the diff axis
+            - width, height: Of the diff axis, where the origin is x, y
+
+        Because we will create the diff axis in data coordinates of the main ab_axis,
+        (transform=self.ax_ab.transData), `x, y, width, height` must all be specified
+        in data coordinates of the main ab_axis.
+
+        Returns
+        -------
+
+        """
+
+        (
+            num_y_ticks_below_zero,
+            num_y_ticks_above_zero,
+        ) = self._determine_num_y_ticks_above_below_zero()
+
+        ax_diff_x = 2.5
+        ax_diff_y = self.y_ticks_adjusted[0] + (
+            (self.estimates.a.mean - (num_y_ticks_below_zero * self.ab_ytick_step))
+            - self.y_ticks_adjusted[0]
         )
 
-        y_ticks = list(np.arange(-num_y_ticks_below_zero * self.ab_ytick_step,
-                                 self.ab_ytick_step * num_y_ticks_above_zero, self.ab_ytick_step))
+        y_ticks = list(
+            np.arange(
+                -num_y_ticks_below_zero * self.ab_ytick_step,
+                self.ab_ytick_step * num_y_ticks_above_zero,
+                self.ab_ytick_step,
+            )
+        )
+        ax_diff_width = 0.5
+        ax_diff_height = y_ticks[-1] - y_ticks[0]
+
         self.ax_diff = self.ax_ab.inset_axes(
-            [2.5, bottom_left_corner_diff_axis_y_coord, 0.5, y_ticks[-1] - y_ticks[0]],
+            [ax_diff_x, ax_diff_y, ax_diff_width, ax_diff_height],
             transform=self.ax_ab.transData,
         )
         self.ax_diff.set_yticks(y_ticks)
@@ -224,5 +256,3 @@ class Figure:
         if (self.estimates.a.mean - self.estimates.b.mean) >= 0:
             num_y_ticks_above_zero += 1
         return num_y_ticks_above_zero
-
-
