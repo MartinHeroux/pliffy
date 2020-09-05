@@ -16,7 +16,7 @@ class ABD(NamedTuple):
 
 
 class PliffyInfoABD(NamedTuple):
-    """Information used to generate plot
+    """Information used to generate ABD plot
 
     Includes sensible defaults to reduce need for user input
     """
@@ -40,6 +40,7 @@ class PliffyInfoABD(NamedTuple):
     paired_data_line_color: str = "gainsboro"
     paired_data_line_width: int = 1
     paired_line_transparency: float = 0.2
+    paired_data_plot_raw_diff: Literal[True, False] = True
     ci_line_width: int = 1
     fontsize: int = 9
 
@@ -62,6 +63,7 @@ class PliffyInfoABD(NamedTuple):
                f'\tpaired_data_joining_lines={repr(self.paired_data_joining_lines)},\n' \
                f'\tpaired_data_line_color={repr(self.paired_data_line_color)},\n' \
                f'\tpaired_line_transparency={repr(self.paired_line_transparency)},\n' \
+               f'\tpaired_data_plot_raw_diff={repr(self.paired_data_plot_raw_diff)},\n' \
                f'\tci_line_width={repr(self.ci_line_width)},\n' \
                f'\tfontsize={repr(self.fontsize)},\n' \
                ')'

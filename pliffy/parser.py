@@ -2,24 +2,28 @@ from typing import NamedTuple, Literal, Tuple, List
 from pathlib import Path
 
 from pliffy.estimate import _calc_paired_diffs
-from pliffy.blocks import ABD
+from pliffy.utils import ABD
 
 ABD_XVALS = ABD(a=1, b=2, diff=2.8)
 ABD_XVALS_RAW = ABD(a=ABD_XVALS.a + 0.1, b=ABD_XVALS.b - 0.2)
-D_XVAL = 0.3
-D_XVAL_RAW = 0.2
+DIFF_XVAL = 0.3
+DIFF_XVAL_RAW = 0.15
 AB_XLIM = (0.8, 3)
 DIFF_XLIM = (0, 0.5)
 JITTER_RANGE = 0.1
 
+# TODO: Add typehints and documentation
+
 
 def abd(info, estimates):
+    """Parse data and information to simplify plotting ABD figure"""
     jitter = _calc_jitter(info)
     raw_a, raw_b, raw_diff = _parse_raw_abd(info, jitter)
     mean_a, mean_b, mean_diff = _parse_mean_abd(info, estimates)
     ci_a, ci_b, ci_diff = _parse_ci_abd(info, estimates)
     plot_paired_lines = info.paired_data_joining_lines
     paired_lines = _parse_paired_lines(info, jitter)
+    plot_raw_diff = info.paired_data_plot_raw_diff
     xticks = _parse_xticks(info)
     ab_xlim = AB_XLIM
     diff_xlim = DIFF_XLIM
@@ -43,10 +47,14 @@ def abd(info, estimates):
         design=design,
         fontsize=fontsize,
     )
-    d_figure_info = D_figure_info(
-        raw_diff=raw_diff, mean_diff=mean_diff, ci_diff=ci_diff, xlim=diff_xlim,
+    diff_figure_info = Diff_figure_info(
+        raw_diff=raw_diff,
+        mean_diff=mean_diff,
+        plot_raw_diff=plot_raw_diff,
+        ci_diff=ci_diff,
+        xlim=diff_xlim,
     )
-    return save, ab_figure_info, d_figure_info
+    return save, ab_figure_info, diff_figure_info
 
 
 def _calc_jitter(info):
@@ -121,8 +129,8 @@ def _parse_raw_abd(info, jitter):
         ),
     )
     raw_diff = Raw(
-        data=_calc_paired_diffs(info) if info.design == 'paired' else None,
-        xval=D_XVAL_RAW,
+        data=_calc_paired_diffs(info) if info.design == "paired" else None,
+        xval=DIFF_XVAL_RAW,
         jitter=jitter,
         format_=_raw_format(
             info.marker_color.diff,
@@ -157,7 +165,7 @@ def _parse_mean_abd(info, estimates):
         ),
     )
     mean_diff = Mean(
-        data=(D_XVAL, estimates.diff.mean),
+        data=(DIFF_XVAL, estimates.diff.mean),
         format_=_mean_format(
             info.marker_color.diff, info.marker.diff, info.summary_marker_size.diff
         ),
@@ -184,7 +192,7 @@ def _parse_ci_abd(info, estimates):
         format_=_ci_format(info.marker_color.b, info.ci_line_width),
     )
     ci_diff = CI(
-        data=((D_XVAL, D_XVAL), estimates.diff.ci),
+        data=((DIFF_XVAL, DIFF_XVAL), estimates.diff.ci),
         format_=_ci_format(info.marker_color.diff, info.ci_line_width),
     )
     return ci_a, ci_b, ci_diff
@@ -232,8 +240,9 @@ class AB_figure_info(NamedTuple):
     fontsize: int
 
 
-class D_figure_info(NamedTuple):
+class Diff_figure_info(NamedTuple):
     raw_diff: "Raw"
     mean_diff: "Mean"
+    plot_raw_diff: Literal[True, False]
     ci_diff: "CI"
     xlim: Tuple[float]

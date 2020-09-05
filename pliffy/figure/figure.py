@@ -2,10 +2,13 @@ from typing import Literal, Tuple
 
 import matplotlib.pyplot as plt
 
-from pliffy.parse import Xticks, Raw, Mean, CI, Paired
+from pliffy.parser import Xticks, Raw, Mean, CI, Paired
+
+# TODO: Add documentation
 
 
 class Figure:
+    """Mixin class to add basic plotting ability"""
     def _remove_ax_spine(self, spine: Literal["top", "bottom", "left", "right"] = None):
         self.ax.spines[spine].set_visible(False)
 
@@ -28,7 +31,7 @@ class Figure:
     def _plot_raw_data(self, raw: "Raw"):
         xval = raw.xval
         for datum in raw.data:
-            self.ax.plot(xval, datum, **raw.format_)
+            self.ax.plot(xval, datum, clip_on=False, **raw.format_)
             xval += raw.jitter
 
     def _plot_mean_ci(self, mean_: "Mean", ci: "CI"):

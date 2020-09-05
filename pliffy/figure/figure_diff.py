@@ -3,10 +3,12 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 from pliffy.figure import Figure
-from pliffy.parse import Xticks
+from pliffy.parser import Xticks
+
+# TODO: Add typehints and documentation
+
 
 class FigureDiff(Figure):
-
     def __init__(self, info, ax, save):
         self.info = info
         self.ax = ax
@@ -25,8 +27,11 @@ class FigureDiff(Figure):
         self._plot_mean_ci(self.info.mean_diff, self.info.ci_diff)
 
     def _plot_diff_raw_data(self):
-        if self.info.raw_diff.data is not None:
+        if self._plot_raw_diff():
             self._plot_raw_data(self.info.raw_diff)
+
+    def _plot_raw_diff(self):
+        return (self.info.raw_diff.data is not None) and self.info.plot_raw_diff
 
     def _plot_zero_line(self):
         self.ax.plot([0, 0.5], [0, 0], "--", color="grey", linewidth=1)

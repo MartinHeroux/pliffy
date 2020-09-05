@@ -4,6 +4,8 @@ import matplotlib
 
 from pliffy.figure import Figure
 
+# TODO: Add typehints and documentation
+
 
 class FigureAB(Figure):
     def __init__(self, info, ax=None):
@@ -13,14 +15,20 @@ class FigureAB(Figure):
             ax = self._make_figure_axis()
             self.show = True
         self.ax = ax
-        self.min_raw_data = min(min(self.info.raw_a.data), min(self.info.raw_b.data))
-        self.max_raw_data = max(max(self.info.raw_a.data), max(self.info.raw_b.data))
+        self.min_raw_data = self._min_raw_data()
+        self.max_raw_data = self._max_raw_data()
         self._plot()
 
     def _make_figure_axis(self):
         width_height_in_inches = (8.2 / 2.54, 8.2 / 2.54)
         _, ax = plt.subplots(figsize=width_height_in_inches, dpi=600)
         return ax
+
+    def _min_raw_data(self):
+        return min(min(self.info.raw_a.data), min(self.info.raw_b.data))
+
+    def _max_raw_data(self):
+        return max(max(self.info.raw_a.data), max(self.info.raw_b.data))
 
     def _plot(self):
         self._plot_ab_raw_data()
@@ -55,11 +63,15 @@ class FigureAB(Figure):
 
     def _optimise_yticks(self):
         current_yticks = self.ax.get_yticks()
-        ytick_step = current_yticks[1] - current_yticks[0]
-        conservative_yticks = np.arange(current_yticks[0]-ytick_step*3, current_yticks[-1] + 3*ytick_step, ytick_step)
+        self.ytick_step = current_yticks[1] - current_yticks[0]
+        conservative_yticks = np.arange(
+            current_yticks[0] - self.ytick_step * 3,
+            current_yticks[-1] + 3 * self.ytick_step,
+            self.ytick_step,
+        )
         min_ytick = self._min_ytick(conservative_yticks)
         max_ytick = self._max_ytick(conservative_yticks)
-        self.yticks = np.arange(min_ytick, max_ytick + ytick_step, ytick_step)
+        self.yticks = np.arange(min_ytick, max_ytick + self.ytick_step, self.ytick_step)
         self._set_yticks(self.yticks)
 
     def _min_ytick(self, conservative_yticks):

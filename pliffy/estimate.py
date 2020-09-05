@@ -3,7 +3,7 @@ from typing import NamedTuple, Tuple, List
 from scipy.stats import t
 import numpy as np
 
-from pliffy.blocks import ABD
+from pliffy.utils import ABD
 
 
 def calc_abd(info: "blocks.PliffyInfoABD") -> "ABD":
@@ -76,7 +76,7 @@ def _t_value(ci: int, degrees_of_freedom: int):
 
 
 def _unpaired_diff_mean_and_confidence_interval(info, estimates_a, estimates_b):
-    """Calculate mean difference of confidence interval of the mean difference
+    """Calculate mean difference and confidence interval of the mean difference
 
     Equation from: Cumming G, Calin-Jageman R (2017). Introduction to the New
                    Statistics: Estimation, Open Science, and Beyond.
