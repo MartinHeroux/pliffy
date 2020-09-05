@@ -92,7 +92,7 @@ def test_paired_diff_mean_and_confidence_interval(pliffy_data_paired_short):
 
 
 def test_paired_diffs(pliffy_data_paired_short):
-    actual = estimate._paired_diffs(pliffy_data_paired_short)
+    actual = estimate._calc_paired_diffs(pliffy_data_paired_short)
     assert actual == approx([3.727268, 86.716881, -18.809048, 19.871108, -70.667399])
 
 

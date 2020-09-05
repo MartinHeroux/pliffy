@@ -1,16 +1,13 @@
-from typing import NamedTuple, Tuple, Union, Literal
+from pliffy import estimate, parse
+from pliffy.blocks import PliffyInfoABD
+from pliffy.figure import FigureAB, FigureDiff, DiffAxCreator
 
 
-from pliffy import blocks, estimate, figure
-
-
-def plot(pliffy_data: blocks.PliffyData, plot_info: blocks.PlotInfo = blocks.PlotInfo(), ax=None):
-    """Main user interface to generate plot
-    """
-    estimates_a, estimates_b, estimates_diff = estimate.calc(pliffy_data)
-    estimates = blocks.ABD(a=estimates_a, b=estimates_b, diff=estimates_diff)
-    #TODO: print to screen and save to file all estimates
-    figure.Figure(pliffy_data, plot_info, estimates, ax)
-    return estimates
-
+def plot_abd(info: "PliffyInfoABD", ax=None):
+    """Main user interface to generate plot"""
+    estimates = estimate.calc_abd(info)
+    save, ab_fig_info, diff_fig_info = parse.abd(info, estimates)
+    fig_ab = FigureAB(ab_fig_info, ax)
+    diff_ax = DiffAxCreator(fig_ab, info, diff_fig_info).diff_ax()
+    FigureDiff(diff_fig_info, diff_ax, save)
 

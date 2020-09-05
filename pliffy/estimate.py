@@ -1,17 +1,17 @@
-from typing import NamedTuple, Tuple, Union, List
+from typing import NamedTuple, Tuple, List
 
 from scipy.stats import t
 import numpy as np
 
-from pliffy import blocks
+from pliffy.blocks import ABD
 
 
-def calc(pliffy_data: "blocks.PliffyData") -> "Estmates":
-    """Calculate mean difference and confidence interval
+def calc_abd(info: "blocks.PliffyInfoABD") -> "ABD":
+    """Calculate means, mean difference and confidence interval for ABD
 
     Parameters
     ----------
-    pliffy_data
+    info
         a
             First set of data
         b
@@ -22,21 +22,19 @@ def calc(pliffy_data: "blocks.PliffyData") -> "Estmates":
             Desired confidence interval.
             Example: 95 or 99
     """
-    if pliffy_data.design not in ("unpaired", "paired"):
+    if info.design not in ("unpaired", "paired"):
         raise ValueError(
             "`PliffyData.design` must be set to either 'paired' or 'unpaired'"
         )
-    estimates_a, estimates_b = _calc_means_and_confidence_intervals(pliffy_data)
+    estimates_a, estimates_b = _calc_means_and_confidence_intervals(info)
     estimates_diff = None
-    if pliffy_data.design == "unpaired":
+    if info.design == "unpaired":
         estimates_diff = _unpaired_diff_mean_and_confidence_interval(
-            pliffy_data, estimates_a, estimates_b
+            info, estimates_a, estimates_b
         )
-    if pliffy_data.design == "paired":
-        estimates_diff = _paired_diff_mean_and_confidence_interval(
-            pliffy_data
-        )
-    return estimates_a, estimates_b, estimates_diff
+    if info.design == "paired":
+        estimates_diff = _paired_diff_mean_and_confidence_interval(info)
+    return ABD(a=estimates_a, b=estimates_b, diff=estimates_diff)
 
 
 class Estimates(NamedTuple):
@@ -46,14 +44,10 @@ class Estimates(NamedTuple):
     ci: Tuple[float] = None
 
 
-def _calc_means_and_confidence_intervals(pliffy_data) -> Tuple["Estimates"]:
+def _calc_means_and_confidence_intervals(info) -> Tuple["Estimates"]:
     """Calculate means and confidence intervals for data `a` and `b`"""
-    estimates_a = _calc_mean_and_confidence_interval(
-        pliffy_data.a, pliffy_data.ci_percentage
-    )
-    estimates_b = _calc_mean_and_confidence_interval(
-        pliffy_data.b, pliffy_data.ci_percentage
-    )
+    estimates_a = _calc_mean_and_confidence_interval(info.data_a, info.ci_percentage)
+    estimates_b = _calc_mean_and_confidence_interval(info.data_b, info.ci_percentage)
     return estimates_a, estimates_b
 
 
@@ -71,28 +65,28 @@ def _calc_mean_and_confidence_interval(
 
 
 def _sem(data: List[float]) -> float:
+    """Compute standard error of the mean"""
     return np.std(data) / (np.sqrt(len(data)))
 
 
 def _t_value(ci: int, degrees_of_freedom: int):
-    """Calculate Student t-value based on degrees-of-freedom and desired confidence interval"""
+    """Compute student t-value based on degrees-of-freedom and confidence interval"""
     one_sided_conf_int = (100 - (100 - ci) / 2) / 100
     return t.ppf(one_sided_conf_int, degrees_of_freedom)
 
 
-def _unpaired_diff_mean_and_confidence_interval(
-    pliffy_data: "blocks.PliffyData", estimates_a: "Estimates", estimates_b: "Estimates"
-) -> "Estimates":
+def _unpaired_diff_mean_and_confidence_interval(info, estimates_a, estimates_b):
     """Calculate mean difference of confidence interval of the mean difference
 
-    Equation from: Cumming G, Calin-Jageman R (2017). Introduction to the New Statistics:
-                   Estimation, Open Science, and Beyond. Routledge, New York
+    Equation from: Cumming G, Calin-Jageman R (2017). Introduction to the New
+                   Statistics: Estimation, Open Science, and Beyond.
+                   Routledge, New York
     """
-    len_a, len_b = _data_len(pliffy_data)
+    len_a, len_b = _data_len(info)
     degrees_of_freedom = len_a + len_b - 2
-    t_component = _t_value(pliffy_data.ci_percentage, degrees_of_freedom)
-    weighted_sd_a = _weighted_sd(pliffy_data.a)
-    weighted_sd_b = _weighted_sd(pliffy_data.b)
+    t_component = _t_value(info.ci_percentage, degrees_of_freedom)
+    weighted_sd_a = _weighted_sd(info.data_a)
+    weighted_sd_b = _weighted_sd(info.data_b)
     variabilility_component = np.sqrt(
         (weighted_sd_a + weighted_sd_b) / degrees_of_freedom
     )
@@ -103,9 +97,9 @@ def _unpaired_diff_mean_and_confidence_interval(
     return Estimates(mean=diff_mean, ci=diff_ci_vals)
 
 
-def _data_len(pliffy_data: "blocks.PliffyData") -> Tuple[int, int]:
+def _data_len(info) -> Tuple[int, int]:
     """Determine length of data `a` and `b`"""
-    return len(pliffy_data.a), len(pliffy_data.b)
+    return len(info.data_a), len(info.data_b)
 
 
 def _weighted_sd(data: List[float]) -> float:
@@ -113,27 +107,24 @@ def _weighted_sd(data: List[float]) -> float:
     return (len(data) - 1) * (np.std(data)) ** 2
 
 
-def _paired_diff_mean_and_confidence_interval(
-    pliffy_data: "blocks.PliffyData",
-) -> Tuple["Estimates", List[float]]:
+def _paired_diff_mean_and_confidence_interval(info):
     """Calculate mean difference of confidence interval of the mean difference"""
-    len_a, len_b = _data_len(pliffy_data)
+    len_a, len_b = _data_len(info)
     if len_a != len_b:
         raise UnequalLength(
-            "`pliffy_data.a` and `pliffy_data.b` must have the same length."
+            "`info.data_a` and `info.data_b` must have the same length."
         )
-    diff_vals = _paired_diffs(pliffy_data)
-    estimates_diff = _calc_mean_and_confidence_interval(
-        diff_vals, pliffy_data.ci_percentage
-    )
+    diff_vals = _calc_paired_diffs(info)
+    estimates_diff = _calc_mean_and_confidence_interval(diff_vals, info.ci_percentage)
     return estimates_diff
 
 
-def _paired_diffs(pliffy_data):
+def _calc_paired_diffs(info):
     """Calculate paired difference for data in `a` and `b`"""
-    return [b - a for a, b in zip(pliffy_data.a, pliffy_data.b)]
+    return [b - a for a, b in zip(info.data_a, info.data_b)]
 
 
 class UnequalLength(Exception):
     """Custom exception for paired analysis when data_a/data_b not same length"""
+
     pass
