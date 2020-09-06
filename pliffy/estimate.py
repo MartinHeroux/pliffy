@@ -9,7 +9,7 @@ from pliffy.utils import ABD
 VALID_DESIGN = ("unpaired", "paired")
 
 
-def calc_abd(info: "blocks.PliffyInfoABD") -> "ABD":
+def calc_abd(info: "utils.PliffyInfoABD") -> "ABD":
     """Calculate means, mean difference and confidence interval for ABD
 
     Parameters
@@ -47,7 +47,9 @@ class Estimates(NamedTuple):
     ci: Tuple[float, float] = None
 
 
-def _calc_means_and_confidence_intervals(info) -> Tuple["Estimates"]:
+def _calc_means_and_confidence_intervals(
+    info: "utils.PliffyInfoABD",
+) -> Tuple["Estimates"]:
     """Calculate means and confidence intervals for data `a` and `b`"""
     estimates_a = _calc_mean_and_confidence_interval(info.data_a, info.ci_percentage)
     estimates_b = _calc_mean_and_confidence_interval(info.data_b, info.ci_percentage)
@@ -78,7 +80,9 @@ def _t_value(ci: int, degrees_of_freedom: int):
     return t.ppf(one_sided_conf_int, degrees_of_freedom)
 
 
-def _unpaired_mean_diff_and_confidence_interval(info, estimates_a, estimates_b):
+def _unpaired_mean_diff_and_confidence_interval(
+    info: "utils.PliffyInfoABD", estimates_a: "Estimate", estimates_b: "Estimate"
+):
     """Calculate mean difference and confidence interval of the mean difference
 
     Equation from: Cumming G, Calin-Jageman R (2017). Introduction to the New
@@ -101,7 +105,7 @@ def _unpaired_mean_diff_and_confidence_interval(info, estimates_a, estimates_b):
     return estimates_diff
 
 
-def _data_len(info) -> Tuple[int, int]:
+def _data_len(info: "utils.PliffyInfoABD") -> Tuple[int, int]:
     """Determine length of data `a` and `b`"""
     return len(info.data_a), len(info.data_b)
 
@@ -111,20 +115,20 @@ def _weighted_sd(data: List[float]) -> float:
     return (len(data) - 1) * (np.std(data)) ** 2
 
 
-def _paired_mean_diff_and_confidence_interval(info):
+def _paired_mean_diff_and_confidence_interval(info: "utils.PliffyInfoABD"):
     """Calculate mean difference of confidence interval of the mean difference"""
     len_data_a, len_data_b = _data_len(info)
     if len_data_a != len_data_b:
         raise UnequalLength(
             "`PliffyInfoABD.data_a` and `PliffyInfoABD.data_b` must have the "
-              "same length in paired design."
+            "same length in paired design."
         )
     diff_vals = _calc_paired_diffs(info)
     estimates_diff = _calc_mean_and_confidence_interval(diff_vals, info.ci_percentage)
     return estimates_diff
 
 
-def _calc_paired_diffs(info):
+def _calc_paired_diffs(info: "utils.PliffyInfoABD"):
     """Calculate paired difference for data in `a` and `b`"""
     return [b - a for a, b in zip(info.data_a, info.data_b)]
 
