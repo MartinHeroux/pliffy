@@ -1,21 +1,21 @@
 from typing import NamedTuple, Literal, Tuple, List
 from pathlib import Path
 
-from pliffy.estimate import _calc_paired_diffs
-from pliffy.utils import ABD
+from pliffy import estimate
+from pliffy import utils
 
-ABD_XVALS = ABD(a=1, b=2, diff=2.8)
-ABD_XVALS_RAW = ABD(a=ABD_XVALS.a + 0.1, b=ABD_XVALS.b - 0.2)
+ABD_XVALS = utils.ABD(a=1, b=2, diff=2.8)
+ABD_XVALS_RAW = utils.ABD(a=ABD_XVALS.a + 0.1, b=ABD_XVALS.b - 0.2)
 DIFF_XVAL = 0.3
 DIFF_XVAL_RAW = 0.15
 AB_XLIM = (0.8, 3)
-DIFF_XLIM = (0, 0.5)
+DIFF_XLIM = (0.0, 0.5)
 JITTER_RANGE = 0.1
 
-# TODO: Add typehints and documentation
+# TODO: Add documentation, add tests
 
 
-def abd(info, estimates):
+def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
     """Parse data and information to simplify plotting ABD figure"""
     jitter = _calc_jitter(info)
     raw_a, raw_b, raw_diff = _parse_raw_abd(info, jitter)
@@ -57,17 +57,8 @@ def abd(info, estimates):
     return save, ab_figure_info, diff_figure_info
 
 
-def _calc_jitter(info):
+def _calc_jitter(info: "utils.PliffyInfoABD"):
     return JITTER_RANGE / max([len(info.data_a), len(info.data_b)])
-
-
-def _parse_save(info):
-    return Save(
-        name=info.plot_name,
-        yes_no=info.save,
-        path=info.save_path,
-        type_=info.save_type,
-    )
 
 
 class Save(NamedTuple):
@@ -77,18 +68,27 @@ class Save(NamedTuple):
     type_: Literal["png", "svg", "pdf"] = "png"
 
 
-def _parse_xticks(info):
+def _parse_save(info: "utils.PliffyInfoABD") -> Save:
+    return Save(
+        name=info.plot_name,
+        yes_no=info.save,
+        path=info.save_path,
+        type_=info.save_type,
+    )
+
+
+class Xticks(NamedTuple):
+    vals: Tuple[float, float, float] = tuple()
+    labels: Tuple[str, str, str] = tuple()
+
+
+def _parse_xticks(info: "utils.PliffyInfoABD") -> Xticks:
     return Xticks(
         vals=(ABD_XVALS.a, ABD_XVALS.b, ABD_XVALS.diff), labels=info.xtick_labels
     )
 
 
-class Xticks(NamedTuple):
-    vals: Tuple[float] = ()
-    labels: str = ""
-
-
-def _raw_format(color, marker, markersize, alpha):
+def _raw_format(color: str, marker: str, markersize: int, alpha: float) -> dict:
     return {
         "color": color,
         "marker": marker,
@@ -105,7 +105,7 @@ class Raw(NamedTuple):
     format_: dict
 
 
-def _parse_raw_abd(info, jitter):
+def _parse_raw_abd(info: "utils.PliffyInfoABD", jitter: float) -> Tuple[Raw, Raw, Raw]:
     raw_a = Raw(
         data=info.data_a,
         xval=ABD_XVALS_RAW.a,
@@ -129,7 +129,7 @@ def _parse_raw_abd(info, jitter):
         ),
     )
     raw_diff = Raw(
-        data=_calc_paired_diffs(info) if info.design == "paired" else None,
+        data=estimate._calc_paired_diffs(info) if info.design == "paired" else None,
         xval=DIFF_XVAL_RAW,
         jitter=jitter,
         format_=_raw_format(
@@ -147,11 +147,11 @@ class Mean(NamedTuple):
     format_: dict
 
 
-def _mean_format(color, marker, markersize):
+def _mean_format(color: str, marker: str, markersize: int) -> dict:
     return {"color": color, "marker": marker, "markersize": markersize}
 
 
-def _parse_mean_abd(info, estimates):
+def _parse_mean_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") ->Tuple[Mean, Mean, Mean]:
     mean_a = Mean(
         data=(ABD_XVALS.a, estimates.a.mean),
         format_=_mean_format(
@@ -174,15 +174,15 @@ def _parse_mean_abd(info, estimates):
 
 
 class CI(NamedTuple):
-    data: Tuple[Tuple[float], Tuple[float]]
+    data: Tuple[Tuple[float, float], Tuple[float, float]]
     format_: dict
 
 
-def _ci_format(color, linewidth):
+def _ci_format(color: str, linewidth: int) -> dict:
     return {"color": color, "linewidth": linewidth}
 
 
-def _parse_ci_abd(info, estimates):
+def _parse_ci_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") -> Tuple[CI, CI, CI]:
     ci_a = CI(
         data=((ABD_XVALS.a, ABD_XVALS.a), estimates.a.ci),
         format_=_ci_format(info.marker_color.a, info.ci_line_width),
@@ -201,16 +201,16 @@ def _parse_ci_abd(info, estimates):
 class Paired(NamedTuple):
     a: List[float]
     b: List[float]
-    xvals: Tuple[float]
+    xvals: Tuple[float, float]
     jitter: float
     format_: dict
 
 
-def _paired_line_format(color, linewidth, alpha):
+def _paired_line_format(color: str, linewidth: int, alpha: float) -> dict:
     return {"color": color, "linewidth": linewidth, "alpha": alpha}
 
 
-def _parse_paired_lines(info, jitter):
+def _parse_paired_lines(info: "utils.PliffyInfoABD", jitter: float) -> Paired:
     return Paired(
         a=info.data_a,
         b=info.data_b,
@@ -234,7 +234,7 @@ class AB_figure_info(NamedTuple):
     paired_lines: "Paired"
     plot_paired_lines: Literal[True, False]
     xticks: "Xticks"
-    xlim: Tuple[float]
+    xlim: Tuple[float, float]
     ylabel: str
     design: Literal["paired", "unpaired"]
     fontsize: int
@@ -245,4 +245,4 @@ class Diff_figure_info(NamedTuple):
     mean_diff: "Mean"
     plot_raw_diff: Literal[True, False]
     ci_diff: "CI"
-    xlim: Tuple[float]
+    xlim: Tuple[float, float]

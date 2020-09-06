@@ -1,13 +1,23 @@
+from typing import Literal, Tuple
+
 import numpy as np
+from matplotlib.axes._subplots import Subplot
+
+from pliffy import utils, parser
 
 DIFF_X = 2.5
 DIFF_WIDTH = 0.5
 
-# TODO: Add typehints and documentation
+# TODO: Add documentation and tests
 
 
 class DiffAxCreator:
-    def __init__(self, parent_figure, pliffy_info, diff_fig_info):
+    def __init__(
+        self,
+        parent_figure: Subplot,
+        pliffy_info: "utils.PliffyInfoABD",
+        diff_fig_info: "parser.Diff_figure_info",
+    ):
 
         self.parent_figure = parent_figure
         self.info = pliffy_info
@@ -36,31 +46,31 @@ class DiffAxCreator:
 
     """
 
-    def _min_diff(self):
+    def _min_diff(self) -> float:
         if self._plot_raw_diff():
             return min(self.diff_fig_info.raw_diff.data)
         else:
             return self.diff_fig_info.ci_diff.data[1][0]
 
-    def _plot_raw_diff(self):
+    def _plot_raw_diff(self) -> Literal[True, False]:
         return (
             self.parent_figure.info.design == "paired"
             and self.diff_fig_info.plot_raw_diff
         )
 
-    def _max_diff(self):
+    def _max_diff(self) -> float:
         if self._plot_raw_diff():
             return max(self.diff_fig_info.raw_diff.data)
         else:
             return self.diff_fig_info.ci_diff.data[1][1]
 
-    def _ytick_step(self):
-        return self.parent_figure.yticks[1] - self.parent_figure.yticks[0]
+    def _ytick_step(self) -> float:
+        return self.parent_figure.ytick_step
 
-    def _calc_diff_y(self):
+    def _calc_diff_y(self) -> float:
         return self.parent_figure.info.mean_a.data[1] - abs(self.yticks[0])
 
-    def _optimize_diff_yticks(self):
+    def _optimize_diff_yticks(self) -> Tuple[float]:
         min_ytick = 0
         while True:
             if self.min_diff < min_ytick:
@@ -73,12 +83,12 @@ class DiffAxCreator:
                 max_ytick += self.ytick_step
             else:
                 break
-        return np.arange(min_ytick, max_ytick + self.ytick_step, self.ytick_step)
+        return tuple(np.arange(min_ytick, max_ytick + self.ytick_step, self.ytick_step))
 
-    def _calc_diff_height(self):
+    def _calc_diff_height(self) -> float:
         return self.yticks[-1] - self.yticks[0]
 
-    def diff_ax(self):
+    def diff_ax(self) -> Subplot:
         diff_ax = self.parent_figure.ax.inset_axes(
             [self.x, self.y, self.width, self.height],
             transform=self.parent_figure.ax.transData,

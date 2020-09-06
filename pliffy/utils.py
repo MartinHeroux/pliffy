@@ -18,7 +18,7 @@ class ABD(NamedTuple):
 class PliffyInfoABD(NamedTuple):
     """Information used to generate ABD plot
 
-    Includes sensible defaults to reduce need for user input
+    Sensible defaults reduce need for user input
     """
 
     data_a: list = None

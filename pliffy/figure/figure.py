@@ -8,7 +8,7 @@ from pliffy.parser import Xticks, Raw, Mean, CI, Paired
 
 
 class Figure:
-    """Mixin class to add basic plotting ability"""
+    """Mixin class to add low-level plotting ability"""
     def _remove_ax_spine(self, spine: Literal["top", "bottom", "left", "right"] = None):
         self.ax.spines[spine].set_visible(False)
 
@@ -44,7 +44,3 @@ class Figure:
             self.ax.plot(xvals, [a, b], **paired.format_)
             xvals[0] += paired.jitter
             xvals[1] -= paired.jitter
-
-    def _show(self, show: bool = True):
-        if show:
-            plt.show()
