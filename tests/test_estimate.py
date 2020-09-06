@@ -46,7 +46,7 @@ def test_calc_mean_and_confidence_interval(data_a, ci, expected):
 def test_unpaired_diff_mean_and_confidence_interval(
     pliffy_data_unpaired, estimates_a, estimates_b
 ):
-    estimates_diff = estimate._unpaired_diff_mean_and_confidence_interval(
+    estimates_diff = estimate._unpaired_mean_diff_and_confidence_interval(
         pliffy_data_unpaired, estimates_a, estimates_b
     )
     assert (estimates_diff.mean, estimates_diff.ci[0], estimates_diff.ci[1]) == approx(
@@ -83,7 +83,7 @@ def test_calc_means_and_confidence_intervals_unpaired(pliffy_data_unpaired):
 
 
 def test_paired_diff_mean_and_confidence_interval(pliffy_data_paired_short):
-    estimates_diff = estimate._paired_diff_mean_and_confidence_interval(
+    estimates_diff = estimate._paired_mean_diff_and_confidence_interval(
         pliffy_data_paired_short
     )
     assert (estimates_diff.mean, estimates_diff.ci[0], estimates_diff.ci[1]) == approx(
@@ -96,11 +96,20 @@ def test_paired_diffs(pliffy_data_paired_short):
     assert actual == approx([3.727268, 86.716881, -18.809048, 19.871108, -70.667399])
 
 
-def test_ValueError_PliffyData_bad_design(capfd, pliffy_data_bad_design):
-    with pytest.raises(ValueError, match="`PliffyData.design` must be set to either 'paired' or 'unpaired'"):
-        estimates_diff, diff_vals = estimate.calc(pliffy_data_bad_design)
+def test_ValueError_PliffyData_invalid_design(capfd, pliffy_data_bad_design):
+    with pytest.raises(
+        ValueError,
+        match="`PliffyData.design` must be set to either 'paired' or 'unpaired'",
+    ):
+        estimates = estimate.calc_abd(pliffy_data_bad_design)
 
 
-def test_ValueError_PliffyData_bad_design(capfd, pliffy_data_unpaired_data_paired_design):
-    with pytest.raises(estimate.UnequalLength, match="`pliffy_data.a` and `pliffy_data.b` must have the same length."):
-        estimates_diff, diff_vals = estimate.calc(pliffy_data_unpaired_data_paired_design)
+def test_ValueError_PliffyData_unequal_length_data(
+    capfd, pliffy_data_unpaired_data_paired_design
+):
+    with pytest.raises(
+        estimate.UnequalLength,
+        match="`PliffyInfoABD.data_a` and `PliffyInfoABD.data_b` must have the "
+              "same length in paired design.",
+    ):
+        estimates_diff = estimate.calc_abd(pliffy_data_unpaired_data_paired_design)
