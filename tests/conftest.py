@@ -21,15 +21,20 @@ def mock_data(n_values=(30, 30), means=(100, 100), standard_deviations=(10, 10))
 @pytest.fixture()
 def data_a():
     random.seed(42)
-    return [random.random() * 100 for _ in range(30)]
+    return _make_random_data(30)
+
+
+def _make_random_data(num_samples):
+    return [random.random() * 100 for _ in range(num_samples)]
 
 
 @pytest.fixture()
 def pliffy_data_paired():
     random.seed(42)
-    return utils.PliffyData(
-        a=[random.random() * 100 for _ in range(30)],
-        b=[random.random() * 100 for _ in range(30)],
+    data = _make_random_data(60)
+    return utils.PliffyInfoABD(
+        data_a=data[:30],
+        data_b=data[30:],
         design="paired",
     )
 
@@ -37,9 +42,10 @@ def pliffy_data_paired():
 @pytest.fixture()
 def pliffy_data_paired_short():
     random.seed(42)
-    return utils.PliffyData(
-        a=[random.random() * 100 for _ in range(5)],
-        b=[random.random() * 100 for _ in range(5)],
+    data = _make_random_data(10)
+    return utils.PliffyInfoABD(
+        data_a=data[:5],
+        data_b=data[5:],
         design="paired",
     )
 
@@ -47,9 +53,10 @@ def pliffy_data_paired_short():
 @pytest.fixture()
 def pliffy_data_unpaired():
     random.seed(73)
-    return utils.PliffyData(
-        a=[random.random() * 100 for _ in range(30)],
-        b=[random.random() * 100 for _ in range(20)],
+    data = _make_random_data(50)
+    return utils.PliffyInfoABD(
+        data_a=data[:30],
+        data_b=data[30:],
     )
 
 
@@ -65,14 +72,14 @@ def estimates_b():
 
 @pytest.fixture()
 def pliffy_data_bad_design():
-    return utils.PliffyData(a=[3], b=[6], design='not_possible')
+    return utils.PliffyInfoABD(data_a=[3], data_b=[6], design='not_possible')
 
 
 @pytest.fixture()
 def pliffy_data_unpaired_data_paired_design():
     random.seed(73)
-    return utils.PliffyData(
-        a=[random.random() * 100 for _ in range(30)],
-        b=[random.random() * 100 for _ in range(20)],
+    return utils.PliffyInfoABD(
+        data_a=_make_random_data(30),
+        data_b=_make_random_data(20),
         design='paired'
     )
