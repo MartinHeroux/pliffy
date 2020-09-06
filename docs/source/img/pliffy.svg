@@ -7,46 +7,46 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="drawing.svg"
-   inkscape:version="1.0 (1.0+r73+1)"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 158.75 79.375002"
+   width="600"
    height="300"
-   width="600">
+   viewBox="0 0 158.75 79.375002"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (1.0+r73+1)"
+   sodipodi:docname="pliffy.svg">
   <defs
      id="defs2">
     <clipPath
-       id="clipPath922"
-       clipPathUnits="userSpaceOnUse">
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath922">
       <path
-         d="m 32.09658,115.09139 -1.020814,-3.80972 -1.020815,-3.80973 3.809726,1.02082 3.809726,1.02081 -2.788911,2.78891 z"
-         inkscape:transform-center-y="-1.1170668"
-         inkscape:transform-center-x="-1.1423072e-06"
+         id="path924"
          style="opacity:0.147759;fill:#000000;stroke:#000000;stroke-width:0.205681;stroke-linejoin:round"
-         id="path924" />
+         inkscape:transform-center-x="-1.1423072e-06"
+         inkscape:transform-center-y="-1.1170668"
+         d="m 32.09658,115.09139 -1.020814,-3.80972 -1.020815,-3.80973 3.809726,1.02082 3.809726,1.02081 -2.788911,2.78891 z" />
     </clipPath>
   </defs>
   <sodipodi:namedview
-     units="px"
-     inkscape:window-maximized="1"
-     inkscape:window-y="0"
-     inkscape:window-x="0"
-     inkscape:window-height="1383"
-     inkscape:window-width="2560"
-     showgrid="false"
-     inkscape:document-rotation="0"
-     inkscape:current-layer="g1771"
-     inkscape:document-units="mm"
-     inkscape:cy="474.06382"
-     inkscape:cx="517.82421"
-     inkscape:zoom="1"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
+     id="base"
      pagecolor="#ffffff"
-     id="base" />
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="424.31933"
+     inkscape:cy="615.53819"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g1771"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1383"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     units="px" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -55,116 +55,116 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <text
-       id="text835"
-       y="86.692627"
-       x="39.643402"
+       xml:space="preserve"
        style="font-size:5.64444px;line-height:0;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       xml:space="preserve"><tspan
-         style="stroke-width:0.264583"
-         y="86.692627"
-         x="39.643402"
+       x="39.643402"
+       y="86.692627"
+       id="text835"><tspan
+         sodipodi:role="line"
          id="tspan833"
-         sodipodi:role="line" /></text>
+         x="39.643402"
+         y="86.692627"
+         style="stroke-width:0.264583" /></text>
     <g
        id="g952">
       <g
-         transform="matrix(4.3029156,0,0,4.3029156,-123.31869,-325.88383)"
-         id="g1771">
+         id="g1771"
+         transform="matrix(4.3029156,0,0,4.3029156,-123.31869,-325.88383)">
         <rect
-           inkscape:export-ydpi="600"
-           inkscape:export-xdpi="600"
-           y="108.0024"
-           x="25.161947"
-           height="18.398411"
-           width="36.66024"
+           style="opacity:1;fill:#ffffff;stroke:#ffffff;stroke-width:0.146157"
            id="rect1923"
-           style="opacity:1;fill:#ffffff;stroke:#ffffff;stroke-width:0.172555" />
-        <g
-           inkscape:export-ydpi="600"
+           width="39.821896"
+           height="12.151706"
+           x="7.21279"
+           y="115.87476"
            inkscape:export-xdpi="600"
-           id="g882"
-           transform="matrix(1.8908373,1.8908373,-1.8908373,1.8908373,182.13505,-151.92589)"
+           inkscape:export-ydpi="600" />
+        <g
+           style="opacity:0.780803;mix-blend-mode:normal"
            clip-path="url(#clipPath922)"
-           style="opacity:0.780803;mix-blend-mode:normal">
+           transform="matrix(2.6239178,2.6239178,-2.6239178,2.6239178,311.92906,-262.35821)"
+           id="g882"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600">
           <g
-             id="g895"
-             transform="translate(-7.1894829,7.6041023)">
+             transform="translate(-7.1894829,7.6041023)"
+             id="g895">
             <g
                id="g920">
               <path
-                 id="rect847"
+                 d="m 36.416412,99.614746 h 2.869649 v 7.872544 h -2.869649 z"
                  style="opacity:1;fill:#ff3300;stroke:none;stroke-width:0.167481;stroke-linejoin:round"
-                 d="m 36.416412,99.614746 h 2.869649 v 7.872544 h -2.869649 z" />
+                 id="rect847" />
               <path
-                 id="rect847-1"
+                 d="m 39.28606,99.614746 h 2.869649 v 7.872544 H 39.28606 Z"
                  style="opacity:1;fill:#003399;stroke:none;stroke-width:0.167481;stroke-linejoin:round"
-                 d="m 39.28606,99.614746 h 2.869649 v 7.872544 H 39.28606 Z" />
+                 id="rect847-1" />
               <path
-                 id="rect847-1-8"
+                 d="m 42.155708,99.614746 h 2.869649 v 7.872544 h -2.869649 z"
                  style="opacity:1;fill:#009900;stroke:none;stroke-width:0.167481;stroke-linejoin:round"
-                 d="m 42.155708,99.614746 h 2.869649 v 7.872544 h -2.869649 z" />
+                 id="rect847-1-8" />
             </g>
           </g>
         </g>
         <text
-           inkscape:export-ydpi="600"
-           inkscape:export-xdpi="600"
+           xml:space="preserve"
+           style="font-size:2.98164px;line-height:1.1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.139764"
+           x="28.379612"
+           y="119.76029"
            id="text839-3"
-           y="118.95722"
-           x="45.895569"
-           style="font-size:2.61096px;line-height:1.1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.122389"
-           xml:space="preserve"><tspan
-             id="tspan841-6"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.61096px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.122389"
-             y="118.95722"
-             x="45.895569"
-             sodipodi:role="line"><tspan
-   id="tspan1795"
-   style="fill:#ff3300;stroke-width:0.122389">pl</tspan>otting</tspan><tspan
-             id="tspan1791"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.61096px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.122389"
-             y="121.93433"
-             x="45.895569"
-             sodipodi:role="line"><tspan
-   id="tspan1797"
-   style="fill:#0066cc;stroke-width:0.122389"><tspan
-   id="tspan1801"
-   style="fill:#000000;stroke-width:0.122389">d</tspan>iff</tspan>erences</tspan><tspan
-             id="tspan1793"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.61096px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.122389"
-             y="124.91144"
-             x="45.895569"
-             sodipodi:role="line">in P<tspan
-   id="tspan1799"
-   style="fill:#009900;stroke-width:0.122389">y</tspan>thon</tspan></text>
-        <text
-           inkscape:export-ydpi="600"
            inkscape:export-xdpi="600"
-           id="text839-7"
-           y="114.83228"
-           x="44.101974"
+           inkscape:export-ydpi="600"><tspan
+             sodipodi:role="line"
+             x="28.379612"
+             y="119.76029"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.98164px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.139764"
+             id="tspan841-6"><tspan
+   style="fill:#ff3300;stroke-width:0.139764"
+   id="tspan1795">pl</tspan>otting</tspan><tspan
+             sodipodi:role="line"
+             x="28.379612"
+             y="123.16006"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.98164px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.139764"
+             id="tspan1791"><tspan
+   style="fill:#0066cc;stroke-width:0.139764"
+   id="tspan1797"><tspan
+   style="fill:#000000;stroke-width:0.139764"
+   id="tspan1801">d</tspan>iff</tspan>erences</tspan><tspan
+             sodipodi:role="line"
+             x="28.379612"
+             y="126.55983"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.98164px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.139764"
+             id="tspan1793">in P<tspan
+   style="fill:#009900;stroke-width:0.139764"
+   id="tspan1799">y</tspan>thon</tspan></text>
+        <text
+           xml:space="preserve"
            style="font-size:6.3383px;line-height:1.1;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.297108"
-           xml:space="preserve"><tspan
-             id="tspan841-5"
+           x="8.3298979"
+           y="125.19399"
+           id="text839-7"
+           inkscape:export-xdpi="600"
+           inkscape:export-ydpi="600"><tspan
+             sodipodi:role="line"
+             x="8.3298979"
+             y="125.19399"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3383px;font-family:Purisa;-inkscape-font-specification:'Purisa, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.297108"
-             y="114.83228"
-             x="44.101974"
-             sodipodi:role="line"><tspan
-               id="tspan1821"
-               style="fill:#ff3300;stroke-width:0.297108">pl</tspan><tspan
-               id="tspan1823"
-               style="fill:#0066cc;stroke-width:0.297108">iff</tspan><tspan
-               id="tspan1825"
-               style="fill:#009900;stroke-width:0.297108">y</tspan></tspan></text>
+             id="tspan841-5"><tspan
+               style="fill:#ff3300;stroke-width:0.297108"
+               id="tspan1821">pl</tspan><tspan
+               style="fill:#0066cc;stroke-width:0.297108"
+               id="tspan1823">iff</tspan><tspan
+               style="fill:#009900;stroke-width:0.297108"
+               id="tspan1825">y</tspan></tspan></text>
       </g>
     </g>
   </g>
