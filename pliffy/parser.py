@@ -78,8 +78,8 @@ def _parse_save(info: "utils.PliffyInfoABD") -> Save:
 
 
 class Xticks(NamedTuple):
-    vals: Tuple[float, float, float]
-    labels: "utils.ABD"
+    vals: Tuple[float, float, float] = tuple()
+    labels: Tuple[str, str, str] = tuple()
 
 
 def _parse_xticks(info: "utils.PliffyInfoABD") -> Xticks:

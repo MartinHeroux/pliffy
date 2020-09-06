@@ -1,15 +1,16 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.axes._subplots import Subplot
 
 from pliffy.figure import Figure
-from pliffy.parser import Xticks
+from pliffy import parser
 
-# TODO: Add typehints and documentation
+# TODO: Add documentation and tests
 
 
 class FigureDiff(Figure):
-    def __init__(self, info, ax, save):
+    def __init__(self, info: "parser.Diff_figure_info", ax: Subplot, save: "parser.Save"):
         self.info = info
         self.ax = ax
         self.save = save
@@ -48,12 +49,12 @@ class FigureDiff(Figure):
         self._remove_ax_spine("top")
         self._remove_ax_spine("bottom")
         self._remove_ax_spine("left")
-        self._set_xticks(Xticks())
+        self._set_xticks(parser.Xticks())
 
     def _save(self):
         if self.save.yes_no:
-            name = self.info.save.name + "." + self.info.save.name
-            fig_path = Path(self.info.path) / name
+            name = self.save.name + "." + self.save.name
+            fig_path = Path(self.save.path) / name
             plt.savefig(fig_path, dpi=600)
 
     def _show(self):
