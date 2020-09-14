@@ -31,8 +31,9 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
     fontsize = info.fontsize
     design = info.design
     save = _parse_save(info)
+    show = info.show
 
-    ab_figure_info = AB_figure_info(
+    ab_figure_info = ABFigureInfo(
         raw_a=raw_a,
         raw_b=raw_b,
         mean_a=mean_a,
@@ -47,12 +48,13 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
         design=design,
         fontsize=fontsize,
     )
-    diff_figure_info = Diff_figure_info(
+    diff_figure_info = DiffFigureInfo(
         raw_diff=raw_diff,
         mean_diff=mean_diff,
         plot_raw_diff=plot_raw_diff,
         ci_diff=ci_diff,
         xlim=diff_xlim,
+        show=show,
     )
     return save, ab_figure_info, diff_figure_info
 
@@ -224,7 +226,7 @@ def _parse_paired_lines(info: "utils.PliffyInfoABD", jitter: float) -> Paired:
     )
 
 
-class AB_figure_info(NamedTuple):
+class ABFigureInfo(NamedTuple):
     raw_a: "Raw"
     raw_b: "Raw"
     mean_a: "Mean"
@@ -240,9 +242,10 @@ class AB_figure_info(NamedTuple):
     fontsize: int
 
 
-class Diff_figure_info(NamedTuple):
+class DiffFigureInfo(NamedTuple):
     raw_diff: "Raw"
     mean_diff: "Mean"
     plot_raw_diff: Literal[True, False]
     ci_diff: "CI"
     xlim: Tuple[float, float]
+    show: Literal[True, False]

@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Literal
 
 import matplotlib.pyplot as plt
 from matplotlib.axes._subplots import Subplot
@@ -10,7 +11,7 @@ from pliffy import parser
 
 
 class FigureDiff(Figure):
-    def __init__(self, info: "parser.Diff_figure_info", ax: Subplot, save: "parser.Save"):
+    def __init__(self, info: "parser.DiffFigureInfo", ax: Subplot, save: "parser.Save"):
         self.info = info
         self.ax = ax
         self.save = save
@@ -58,4 +59,5 @@ class FigureDiff(Figure):
             plt.savefig(fig_path, dpi=600)
 
     def _show(self):
-        plt.show()
+        if self.info.show:
+            plt.show()
