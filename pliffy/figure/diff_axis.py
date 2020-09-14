@@ -16,7 +16,7 @@ class DiffAxCreator:
         self,
         parent_figure: Subplot,
         pliffy_info: "utils.PliffyInfoABD",
-        diff_fig_info: "parser.Diff_figure_info",
+        diff_fig_info: "parser.DiffFigureInfo",
     ):
 
         self.parent_figure = parent_figure

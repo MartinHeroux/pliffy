@@ -15,7 +15,7 @@ EXTRA_Y_TICKS = 3
 
 
 class FigureAB(Figure):
-    def __init__(self, info: "parser.AB_figure_info", ax: Subplot = None):
+    def __init__(self, info: "parser.ABFigureInfo", ax: Subplot = None):
         self.info = info
         matplotlib.rcParams.update({"font.size": info.fontsize})
         if ax is None:

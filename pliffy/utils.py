@@ -43,6 +43,7 @@ class PliffyInfoABD(NamedTuple):
     paired_data_plot_raw_diff: Literal[True, False] = True
     ci_line_width: int = 1
     fontsize: int = 9
+    show: Literal[True, False] = True
 
     def __repr__(self):
         return f'PliffyInfoABD(\n' \
@@ -66,4 +67,5 @@ class PliffyInfoABD(NamedTuple):
                f'\tpaired_data_plot_raw_diff={repr(self.paired_data_plot_raw_diff)},\n' \
                f'\tci_line_width={repr(self.ci_line_width)},\n' \
                f'\tfontsize={repr(self.fontsize)},\n' \
+               f'\tshow={repr(self.show)},\n' \
                ')'

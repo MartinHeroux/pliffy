@@ -1,21 +1,26 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 from pliffy.utils import PliffyInfoABD, ABD
 from pliffy.plot import plot_abd
 
-# TODO: Improve demo to generate series of figures to show off capabilities
 
-n = 60
-mu_a, sigma_a = 100, 25  # mean and standard deviation
-a = np.random.default_rng().normal(mu_a, sigma_a, n)
+def gen_paired_data():
+    sample_size = 60
+    mean_a, standard_deviation_a = 100, 25
+    data_a = np.random.default_rng().normal(mean_a, standard_deviation_a, sample_size)
 
-mu_b, sigma_b = 30, 15  # mean and standard deviation
-effect = np.random.default_rng().normal(mu_b, sigma_b, n)
-b = a - effect
+    mean_b, standard_deviation_b = 30, 15
+    effect = np.random.default_rng().normal(mean_b, standard_deviation_b, sample_size)
+    data_b = data_a - effect
+    return data_a, data_b
+
+
+data_a, data_b = gen_paired_data()
 
 info = PliffyInfoABD(
-    data_a=a,
-    data_b=b,
+    data_a=data_a,
+    data_b=data_b,
     ci_percentage=95,
     design="paired",
     measure_units="Length (cm)",
@@ -36,4 +41,16 @@ info = PliffyInfoABD(
     fontsize=9,
 )
 
-plot_abd(info)
+#plot_abd(info)
+
+
+fig, axes = plt.subplots(nrows=4, figsize=(3, 8))
+last_subplot = len(axes) - 1
+for i, ax in enumerate(axes):
+    data_a, data_b = gen_paired_data()
+    if i != last_subplot:
+        info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False)
+    else:
+        info = PliffyInfoABD(data_a=data_a, data_b=data_b)
+    plot_abd(info, ax)
+
