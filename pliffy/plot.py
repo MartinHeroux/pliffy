@@ -1,6 +1,5 @@
 from pliffy import estimate, parser, utils, figure
 
-# TODO: Test plotting when a pre-generated axis is generated (e.g. a subplot)
 # TODO: Add output of computed estimates for means and confidence intervals
 #       - If plot is saved, include a .txt file of the output in same folder
 

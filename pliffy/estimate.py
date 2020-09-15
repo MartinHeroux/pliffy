@@ -1,4 +1,5 @@
 from typing import NamedTuple, Tuple, List
+from pathlib import Path
 
 from scipy.stats import t
 import numpy as np
@@ -37,7 +38,26 @@ def calc_abd(info: "utils.PliffyInfoABD") -> "ABD":
         )
     if info.design == "paired":
         estimates_diff = _paired_mean_diff_and_confidence_interval(info)
-    return ABD(a=estimates_a, b=estimates_b, diff=estimates_diff)
+    estimates = ABD(a=estimates_a, b=estimates_b, diff=estimates_diff)
+    _print_estimates(estimates, info)
+    return estimates
+
+
+def _print_estimates(estimates, info):
+    estimates_table = _make_estimates_table(estimates, info)
+    print(estimates_table)
+
+
+def _make_estimates_table(estimates, info):
+    header_text = ('outcome', 'mean', f'{info.ci_percentage}% CI')
+    header_filled = f'{header_text[0]:<12s}{header_text[1]:>16s}{header_text[2]:^34s}'
+    markers = '-' * len(header_filled)
+    header = [markers, header_filled, markers]
+    results = list()
+    for estimate, name in zip(estimates, info.xtick_labels):
+        results.append(
+            f"{name:<12s}{estimate.mean:>16.{info.decimals}f}{estimate.ci[0]:>15.{info.decimals}f} to {estimate.ci[1]:<15.{info.decimals}f}")
+    return '\n'.join(header + results + [markers])
 
 
 class Estimates(NamedTuple):

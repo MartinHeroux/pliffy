@@ -68,6 +68,7 @@ class Save(NamedTuple):
     yes_no: Literal[True, False]
     path: Path
     type_: Literal["png", "svg", "pdf"] = "png"
+    dpi: int = 180
 
 
 def _parse_save(info: "utils.PliffyInfoABD") -> Save:
@@ -76,6 +77,7 @@ def _parse_save(info: "utils.PliffyInfoABD") -> Save:
         yes_no=info.save,
         path=info.save_path,
         type_=info.save_type,
+        dpi=info.dpi,
     )
 
 
