@@ -27,10 +27,12 @@ class PliffyInfoABD(NamedTuple):
     design: Literal["paired", "unpaired"] = "unpaired"
     measure_units: str = "Amplitude (a.u.)"
     xtick_labels: ABD = ABD(a="a", b="b", diff="diff")
+    decimals: int = 2
     plot_name: str = "figure"
     save: Literal[True, False] = False
     save_path: Path = None
     save_type: Literal["png", "svg", "pdf"] = "png"
+    dpi: int = 180
     marker: ABD = ABD(a="o", b="o", diff="^")
     marker_color: ABD = ABD(a="black", b="black", diff="black")
     summary_marker_size: ABD = ABD(a=5, b=5, diff=6)
@@ -53,9 +55,12 @@ class PliffyInfoABD(NamedTuple):
                f'\tdesign={repr(self.design)},\n' \
                f'\tmeasure_units={repr(self.measure_units)},\n' \
                f'\txtick_labels={repr(self.xtick_labels)},\n' \
+               f'\tdecimals={repr(self.decimals)},\n' \
+               f'\tplot_name={repr(self.plot_name)},\n' \
                f'\tsave={repr(self.save)},\n' \
                f'\tsave_path={repr(self.save_path)},\n' \
                f'\tsave_type={repr(self.save_type)},\n' \
+               f'\tdpi={repr(self.dpi)},\n' \
                f'\tmarker={repr(self.marker)},\n' \
                f'\tmarker_color={repr(self.marker_color)},\n' \
                f'\tsummary_marker_size={repr(self.summary_marker_size)},\n' \

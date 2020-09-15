@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Literal
 
 import matplotlib.pyplot as plt
 from matplotlib.axes._subplots import Subplot
@@ -22,6 +21,7 @@ class FigureDiff(Figure):
         self._plot_diff_raw_data()
         self._plot_zero_line()
         self._tweak_axes()
+        plt.tight_layout()
         self._save()
         self._show()
 
@@ -54,9 +54,9 @@ class FigureDiff(Figure):
 
     def _save(self):
         if self.save.yes_no:
-            name = self.save.name + "." + self.save.name
+            name = self.save.name + "." + self.save.type_
             fig_path = Path(self.save.path) / name
-            plt.savefig(fig_path, dpi=600)
+            plt.savefig(fig_path, dpi=self.save.dpi)
 
     def _show(self):
         if self.info.show:
