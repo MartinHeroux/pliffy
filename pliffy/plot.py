@@ -1,8 +1,5 @@
 from pliffy import estimate, parser, utils, figure
 
-# TODO: Add output of computed estimates for means and confidence intervals
-#       - If plot is saved, include a .txt file of the output in same folder
-
 
 def plot_abd(info: "utils.PliffyInfoABD", ax=None):
     """Main user interface to generate ABD plot"""

@@ -1,7 +1,5 @@
 from typing import Literal, Tuple
 
-import matplotlib.pyplot as plt
-
 from pliffy.parser import Xticks, Raw, Mean, CI, Paired
 
 # TODO: Add documentation
