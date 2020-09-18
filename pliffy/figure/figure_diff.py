@@ -6,11 +6,23 @@ from matplotlib.axes._subplots import Subplot
 from pliffy.figure import Figure
 from pliffy import parser
 
-# TODO: Add documentation and tests
+# TODO: tests
 
 
 class FigureDiff(Figure):
-    def __init__(self, info: "parser.DiffFigureInfo", ax: Subplot, save: "parser.Save"):
+    """Class to manage plotting Diff part of ABD figure
+
+    Parameters
+    ----------
+    info: FigureInfoDiff
+        Namedtuple containing parsed data and details to plot Diff part of figure
+    ax: Subplot
+        Matplotlib axis object to plot floating axis
+    save: Save
+        NamedTuple containing parsed information related to saving figure
+
+    """
+    def __init__(self, info: "parser.FigureInfoDiff", ax: Subplot, save: "parser.Save"):
         self.info = info
         self.ax = ax
         self.save = save

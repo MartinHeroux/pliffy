@@ -43,21 +43,23 @@ def calc_abd(info: "utils.PliffyInfoABD") -> "ABD":
     return estimates
 
 
-def _print_estimates(estimates, info):
+def _print_estimates(estimates: ABD, info: "utils.PliffyInfoABD"):
+    """Print estimates for a, b and diff to Python console as a table"""
     estimates_table = _make_estimates_table(estimates, info)
     print(estimates_table)
 
 
-def _make_estimates_table(estimates, info):
-    header_text = ('outcome', 'mean', f'{info.ci_percentage}% CI')
-    header_filled = f'{header_text[0]:<12s}{header_text[1]:>16s}{header_text[2]:^34s}'
-    markers = '-' * len(header_filled)
+def _make_estimates_table(estimates: ABD, info: "utils.PliffyInfoABD") -> str:
+    header_text = ("outcome", "mean", f"{info.ci_percentage}% CI")
+    header_filled = f"{header_text[0]:<12s}{header_text[1]:>16s}{header_text[2]:^34s}"
+    markers = "-" * len(header_filled)
     header = [markers, header_filled, markers]
     results = list()
     for estimate, name in zip(estimates, info.xtick_labels):
         results.append(
-            f"{name:<12s}{estimate.mean:>16.{info.decimals}f}{estimate.ci[0]:>15.{info.decimals}f} to {estimate.ci[1]:<15.{info.decimals}f}")
-    return '\n'.join(header + results + [markers])
+            f"{name:<12s}{estimate.mean:>16.{info.decimals}f}{estimate.ci[0]:>15.{info.decimals}f} to {estimate.ci[1]:<15.{info.decimals}f}"
+        )
+    return "\n".join(header + results + [markers])
 
 
 class Estimates(NamedTuple):
