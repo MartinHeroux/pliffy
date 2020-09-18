@@ -8,14 +8,24 @@ from matplotlib.axes._subplots import Subplot
 from pliffy.figure import Figure
 from pliffy import parser
 
-# TODO: Add documentation and tests
-DPI = 600
+# TODO: tests
 WIDTH_HEIGHT_IN_INCHES = (8.2 / 2.54, 8.2 / 2.54)
 EXTRA_Y_TICKS = 3
 
 
 class FigureAB(Figure):
-    def __init__(self, info: "parser.ABFigureInfo", ax: Subplot = None):
+    """Class to manage plotting AB part of ABD figure
+
+    Parameters
+    ----------
+    info: FigureInfoAB
+        Namedtuple containing parsed data and details to plot AB part of figure
+    ax: Subplot
+        Matplotlib axis object
+
+    """
+
+    def __init__(self, info: "parser.FigureInfoAB", ax: Subplot = None):
         self.info = info
         matplotlib.rcParams.update({"font.size": info.fontsize})
         if ax is None:
@@ -29,7 +39,7 @@ class FigureAB(Figure):
 
     def _make_figure_axis(self) -> Subplot:
         width_height_in_inches = WIDTH_HEIGHT_IN_INCHES
-        _, ax = plt.subplots(figsize=width_height_in_inches, dpi=DPI)
+        _, ax = plt.subplots(figsize=width_height_in_inches)
         return ax
 
     def _min_raw_data(self) -> float:
@@ -70,24 +80,28 @@ class FigureAB(Figure):
         return ytick_step, yticks
 
     def _optimise_yticks(self) -> Tuple[float, Tuple[float]]:
+        """Find yticks that include all raw data points"""
         current_yticks = self.ax.get_yticks()
         ytick_step = current_yticks[1] - current_yticks[0]
-        conservative_yticks = tuple(
+        conservative_yticks = self._gen_conservative_yticks(current_yticks, ytick_step)
+        min_ytick = self._find_min_ytick(conservative_yticks)
+        max_ytick = self._find_max_ytick(conservative_yticks)
+        optimised_yticks = self._gen_optimised_yticks(min_ytick, max_ytick, ytick_step)
+        self._set_yticks(optimised_yticks)
+        return ytick_step, optimised_yticks
+
+    def _gen_conservative_yticks(self, current_yticks, ytick_step):
+        """Add three extra ytick at either end"""
+        return tuple(
             np.arange(
                 current_yticks[0] - ytick_step * EXTRA_Y_TICKS,
                 current_yticks[-1] + EXTRA_Y_TICKS * ytick_step,
                 ytick_step,
             )
         )
-        min_ytick = self._min_ytick(conservative_yticks)
-        max_ytick = self._max_ytick(conservative_yticks)
-        yticks = tuple(
-            np.arange(min_ytick, max_ytick + ytick_step, ytick_step)
-        )
-        self._set_yticks(yticks)
-        return ytick_step, yticks
 
-    def _min_ytick(self, conservative_yticks: Tuple[float]) -> float:
+    def _find_min_ytick(self, conservative_yticks: Tuple[float]) -> float:
+        """Find min ytick that includes all raw data point"""
         min_ytick = float()
         for tick in reversed(conservative_yticks):
             if self.min_raw_data > tick:
@@ -95,10 +109,16 @@ class FigureAB(Figure):
                 break
         return min_ytick
 
-    def _max_ytick(self, conservative_yticks: Tuple[float]) -> float:
+    def _find_max_ytick(self, conservative_yticks: Tuple[float]) -> float:
+        """Find max ytick that includes all raw data point"""
         max_ytick = float()
         for tick in conservative_yticks:
             if self.max_raw_data < tick:
                 max_ytick = tick
                 break
         return max_ytick
+
+    def _gen_optimised_yticks(self, min_ytick, max_ytick, ytick_step):
+        return tuple(
+            np.arange(min_ytick, max_ytick + ytick_step, ytick_step)
+        )

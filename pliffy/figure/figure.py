@@ -2,8 +2,6 @@ from typing import Literal, Tuple
 
 from pliffy.parser import Xticks, Raw, Mean, CI, Paired
 
-# TODO: Add documentation
-
 
 class Figure:
     """Mixin class to add low-level plotting ability"""
