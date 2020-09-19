@@ -23,7 +23,7 @@ def test_abd_attribute_error():
 
 def test_pliffy_info_defaults(pliffy_info_abd_default):
     actual = utils.PliffyInfoABD()
-    assert actual == pliffy_info_abd_default
+    assert actual._asdict() == pliffy_info_abd_default
 
 
 def test_pliffy_info_set_data(pliffy_info_abd_custom):
