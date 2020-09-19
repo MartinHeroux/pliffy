@@ -12,7 +12,6 @@ AB_XLIM = (0.8, 3)
 DIFF_XLIM = (0.0, 0.5)
 JITTER_RANGE = 0.1
 
-# TODO: add tests
 
 
 def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):

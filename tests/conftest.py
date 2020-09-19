@@ -5,7 +5,7 @@ import numpy as np
 
 from pliffy import utils
 from pliffy.estimate import Estimates
-from pliffy.utils import PliffyInfoABD, ABD
+from pliffy.utils import ABD
 
 
 @pytest.fixture()
@@ -74,7 +74,7 @@ def pliffy_data_unpaired_data_paired_design():
 
 
 @pytest.fixture()
-def pliffy_info_abd_default():
+def pliffy_info_abd_default_asdict():
     return {
         "data_a": None,
         "data_b": None,
@@ -104,8 +104,7 @@ def pliffy_info_abd_default():
     }
 
 
-@pytest.fixture()
-def pliffy_info_abd_custom():
+def _pliffy_info_abd_custom():
     return {
         "data_a": [1, 2, 3, 4, 5],
         "data_b": [11, 22, 33, 44, 55],
@@ -133,3 +132,23 @@ def pliffy_info_abd_custom():
         "fontsize": 12,
         "show": False,
     }
+
+
+@pytest.fixture()
+def pliffy_info_abd_custom_asdict():
+    return _pliffy_info_abd_custom()
+
+
+@pytest.fixture()
+def pliffy_info_abd_custom_asnamedtuple():
+    return utils.PliffyInfoABD(**_pliffy_info_abd_custom())
+
+
+@pytest.fixture()
+def pliffy_estimates():
+    return ABD(
+        a=Estimates(mean=5, ci=(3.5, 6.5)),
+        b=Estimates(mean=6, ci=(3.2, 8.8)),
+        diff=Estimates(mean=1, ci=(0.1, 1.9)),
+    )
+
