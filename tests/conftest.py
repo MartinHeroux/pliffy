@@ -107,7 +107,7 @@ def pliffy_info_abd_default_asdict():
 def _pliffy_info_abd_custom():
     return {
         "data_a": [1, 2, 3, 4, 5],
-        "data_b": [11, 22, 33, 44, 55],
+        "data_b": [1, 4, 6, 7, 9],
         "ci_percentage": 99,
         "design": "paired",
         "measure_units": "Amplitude (Volts)",
@@ -144,6 +144,45 @@ def pliffy_info_abd_custom_asnamedtuple():
     return utils.PliffyInfoABD(**_pliffy_info_abd_custom())
 
 
+def _pliffy_info_abd_custom_neg_unpaired():
+    return {
+        "data_a": [-11, -22, -32, -43, -52],
+        "data_b": [-11, -43, -61, -71, -92],
+        "ci_percentage": 95,
+        "design": "unpaired",
+        "measure_units": "Amplitude (Volts)",
+        "xtick_labels": ABD(a="Biceps", b="Triceps", diff="Effect"),
+        "decimals": 4,
+        "plot_name": "arm",
+        "save": True,
+        "save_path": "/home/martin/Desktop/",
+        "save_type": "svg",
+        "dpi": 600,
+        "marker": ABD(a="*", b="v", diff="."),
+        "marker_color": ABD(a="tab:red", b="tab:blue", diff="tab:green"),
+        "summary_marker_size": ABD(a=6, b=4, diff=2),
+        "raw_marker_size": ABD(a=6, b=5, diff=3),
+        "raw_marker_transparency": 0.1,
+        "paired_data_joining_lines": False,
+        "paired_data_line_color": "grey",
+        "paired_data_line_width": 2,
+        "paired_line_transparency": 0.3,
+        "paired_data_plot_raw_diff": False,
+        "ci_line_width": 2,
+        "fontsize": 12,
+        "show": False,
+    }
+
+
+@pytest.fixture()
+def pliffy_info_abd_custom_neg_unpaired_asdict():
+    return _pliffy_info_abd_custom()
+
+
+@pytest.fixture()
+def pliffy_info_abd_custom_neg_unpaired_asnamedtuple():
+    return utils.PliffyInfoABD(**_pliffy_info_abd_custom_neg_unpaired())
+
 @pytest.fixture()
 def pliffy_estimates():
     return ABD(
@@ -151,4 +190,3 @@ def pliffy_estimates():
         b=Estimates(mean=6, ci=(3.2, 8.8)),
         diff=Estimates(mean=1, ci=(0.1, 1.9)),
     )
-

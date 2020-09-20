@@ -12,7 +12,7 @@ DIFF_WIDTH = 0.5
 
 
 class DiffAxCreator:
-    """Class to manage creation of floating diff axis
+    """Class to create floating diff axis
 
     Parameters
      ---------

@@ -15,7 +15,7 @@ def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
     assert save._asdict() == expected
 
 
-def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
+def test_abd_abd_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
     _, abd_figure_info, _ = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)
     assert abd_figure_info._asdict() == {
         "raw_a": Raw(
@@ -31,7 +31,7 @@ def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
             },
         ),
         "raw_b": Raw(
-            data=[11, 22, 33, 44, 55],
+            data=[1, 4, 6, 7, 9],
             xval=1.8,
             jitter=0.02,
             format_={
@@ -56,7 +56,7 @@ def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
         ),
         "paired_lines": Paired(
             a=[1, 2, 3, 4, 5],
-            b=[11, 22, 33, 44, 55],
+            b=[1, 4, 6, 7, 9],
             xvals=(1, 2),
             jitter=0.02,
             format_={"color": "grey", "linewidth": 2, "alpha": 0.3},
@@ -72,11 +72,11 @@ def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
     }
 
 
-def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
+def test_abd_diff_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
     _, _, diff_figure_info = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)
     assert diff_figure_info._asdict() == {
         "raw_diff": Raw(
-            data=[10, 20, 30, 40, 50],
+            data=[0, 2, 3, 3, 4],
             xval=0.15,
             jitter=0.02,
             format_={
