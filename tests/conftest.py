@@ -133,7 +133,6 @@ def _pliffy_info_abd_custom():
         "show": False,
     }
 
-
 @pytest.fixture()
 def pliffy_info_abd_custom_asdict():
     return _pliffy_info_abd_custom()
