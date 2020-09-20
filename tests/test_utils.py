@@ -21,15 +21,15 @@ def test_abd_attribute_error():
         abd.a = 1
 
 
-def test_pliffy_info_defaults(pliffy_info_abd_default):
+def test_pliffy_info_defaults(pliffy_info_abd_default_asdict):
     actual = utils.PliffyInfoABD()
-    assert actual._asdict() == pliffy_info_abd_default
+    assert actual._asdict() == pliffy_info_abd_default_asdict
 
 
-def test_pliffy_info_set_data(pliffy_info_abd_custom):
+def test_pliffy_info_set_data(pliffy_info_abd_custom_asdict):
     actual = utils.PliffyInfoABD(
         data_a=[1, 2, 3, 4, 5],
-        data_b=[11, 22, 33, 44, 55],
+        data_b=[1, 4, 6, 7, 9],
         ci_percentage=99,
         design="paired",
         measure_units="Amplitude (Volts)",
@@ -54,4 +54,4 @@ def test_pliffy_info_set_data(pliffy_info_abd_custom):
         fontsize=12,
         show=False,
     )
-    assert actual._asdict() == pliffy_info_abd_custom
+    assert actual._asdict() == pliffy_info_abd_custom_asdict

@@ -8,11 +8,9 @@ from pliffy import utils, parser
 DIFF_X = 2.5
 DIFF_WIDTH = 0.5
 
-# TODO: Add tests
-
 
 class DiffAxCreator:
-    """Class to manage creation of floating diff axis
+    """Class to create floating diff axis
 
     Parameters
      ---------
@@ -34,6 +32,7 @@ class DiffAxCreator:
     in data coordinates of the main ab_axis.
 
     """
+
     def __init__(
         self,
         parent_figure: Subplot,

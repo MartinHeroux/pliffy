@@ -5,6 +5,7 @@ from pliffy.parser import Xticks, Raw, Mean, CI, Paired
 
 class Figure:
     """Mixin class to add low-level plotting ability"""
+
     def _remove_ax_spine(self, spine: Literal["top", "bottom", "left", "right"] = None):
         self.ax.spines[spine].set_visible(False)
 

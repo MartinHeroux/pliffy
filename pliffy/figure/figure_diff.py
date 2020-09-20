@@ -6,8 +6,6 @@ from matplotlib.axes._subplots import Subplot
 from pliffy.figure import Figure
 from pliffy import parser
 
-# TODO: tests
-
 
 class FigureDiff(Figure):
     """Class to manage plotting Diff part of ABD figure
@@ -22,6 +20,7 @@ class FigureDiff(Figure):
         NamedTuple containing parsed information related to saving figure
 
     """
+
     def __init__(self, info: "parser.FigureInfoDiff", ax: Subplot, save: "parser.Save"):
         self.info = info
         self.ax = ax

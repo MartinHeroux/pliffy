@@ -8,4 +8,3 @@ def plot_abd(info: "utils.PliffyInfoABD", ax=None):
     ab_ax = figure.FigureAB(ab_info, ax)
     diff_ax = figure.DiffAxCreator(ab_ax, info, diff_info).diff_ax()
     figure.FigureDiff(diff_info, diff_ax, save)
-

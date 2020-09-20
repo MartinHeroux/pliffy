@@ -8,7 +8,7 @@ from matplotlib.axes._subplots import Subplot
 from pliffy.figure import Figure
 from pliffy import parser
 
-# TODO: tests
+
 WIDTH_HEIGHT_IN_INCHES = (8.2 / 2.54, 8.2 / 2.54)
 EXTRA_Y_TICKS = 3
 
@@ -119,6 +119,4 @@ class FigureAB(Figure):
         return max_ytick
 
     def _gen_optimised_yticks(self, min_ytick, max_ytick, ytick_step):
-        return tuple(
-            np.arange(min_ytick, max_ytick + ytick_step, ytick_step)
-        )
+        return tuple(np.arange(min_ytick, max_ytick + ytick_step, ytick_step))
