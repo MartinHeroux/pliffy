@@ -32,6 +32,7 @@ class DiffAxCreator:
     in data coordinates of the main ab_axis.
 
     """
+
     def __init__(
         self,
         parent_figure: Subplot,

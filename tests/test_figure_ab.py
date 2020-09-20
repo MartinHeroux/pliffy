@@ -11,11 +11,11 @@ def test_figure_ab_paired_data(pliffy_info_abd_custom_asnamedtuple):
     assert ab_ax.min_raw_data == 1
     assert ab_ax.ax.get_ylim() == (0.0, 10.0)
     assert ab_ax.ax.get_xlim() == (0.8, 3.0)
-    assert list(ab_ax.ax.get_yticks()) == [0., 2., 4., 6., 8., 10.]
-    assert list(ab_ax.ax.get_xticks()) == [1., 2., 2.8]
-    assert ab_ax.ax.get_xticklabels()[0].get_text() == 'Biceps'
-    assert ab_ax.ax.get_xticklabels()[1].get_text() == 'Triceps'
-    assert ab_ax.ax.get_xticklabels()[2].get_text() == 'Effect'
+    assert list(ab_ax.ax.get_yticks()) == [0.0, 2.0, 4.0, 6.0, 8.0, 10.0]
+    assert list(ab_ax.ax.get_xticks()) == [1.0, 2.0, 2.8]
+    assert ab_ax.ax.get_xticklabels()[0].get_text() == "Biceps"
+    assert ab_ax.ax.get_xticklabels()[1].get_text() == "Triceps"
+    assert ab_ax.ax.get_xticklabels()[2].get_text() == "Effect"
 
 
 def test_figure_ab_unpaired_data(pliffy_info_abd_custom_neg_unpaired_asnamedtuple):
@@ -30,6 +30,6 @@ def test_figure_ab_unpaired_data(pliffy_info_abd_custom_neg_unpaired_asnamedtupl
     assert ab_ax.ax.get_xlim() == (0.8, 3.0)
     assert list(ab_ax.ax.get_yticks()) == [-100.0, -80.0, -60.0, -40.0, -20.0, 0.0]
     assert list(ab_ax.ax.get_xticks()) == [1.0, 2.0, 2.8]
-    assert ab_ax.ax.get_xticklabels()[0].get_text() == 'Biceps'
-    assert ab_ax.ax.get_xticklabels()[1].get_text() == 'Triceps'
-    assert ab_ax.ax.get_xticklabels()[2].get_text() == 'Effect'
+    assert ab_ax.ax.get_xticklabels()[0].get_text() == "Biceps"
+    assert ab_ax.ax.get_xticklabels()[1].get_text() == "Triceps"
+    assert ab_ax.ax.get_xticklabels()[2].get_text() == "Effect"

@@ -12,7 +12,7 @@ class ABD(NamedTuple):
     diff: Union[str, int, float, "estimate.Estimates"] = None
 
     def __repr__(self):
-        return f'ABD(a={repr(self.a)}, b={repr(self.b)}, diff={repr(self.diff)})'
+        return f"ABD(a={repr(self.a)}, b={repr(self.b)}, diff={repr(self.diff)})"
 
 
 class PliffyInfoABD(NamedTuple):
@@ -48,29 +48,31 @@ class PliffyInfoABD(NamedTuple):
     show: Literal[True, False] = True
 
     def __repr__(self):
-        return f'PliffyInfoABD(\n' \
-               f'\tdata_a={repr(self.data_a)},\n' \
-               f'\tdata_b={repr(self.data_b)},\n' \
-               f'\tci_percentage={repr(self.ci_percentage)},\n' \
-               f'\tdesign={repr(self.design)},\n' \
-               f'\tmeasure_units={repr(self.measure_units)},\n' \
-               f'\txtick_labels={repr(self.xtick_labels)},\n' \
-               f'\tdecimals={repr(self.decimals)},\n' \
-               f'\tplot_name={repr(self.plot_name)},\n' \
-               f'\tsave={repr(self.save)},\n' \
-               f'\tsave_path={repr(self.save_path)},\n' \
-               f'\tsave_type={repr(self.save_type)},\n' \
-               f'\tdpi={repr(self.dpi)},\n' \
-               f'\tmarker={repr(self.marker)},\n' \
-               f'\tmarker_color={repr(self.marker_color)},\n' \
-               f'\tsummary_marker_size={repr(self.summary_marker_size)},\n' \
-               f'\traw_marker_size={repr(self.raw_marker_size)},\n' \
-               f'\traw_marker_transparency={repr(self.raw_marker_transparency)},\n' \
-               f'\tpaired_data_joining_lines={repr(self.paired_data_joining_lines)},\n' \
-               f'\tpaired_data_line_color={repr(self.paired_data_line_color)},\n' \
-               f'\tpaired_line_transparency={repr(self.paired_line_transparency)},\n' \
-               f'\tpaired_data_plot_raw_diff={repr(self.paired_data_plot_raw_diff)},\n' \
-               f'\tci_line_width={repr(self.ci_line_width)},\n' \
-               f'\tfontsize={repr(self.fontsize)},\n' \
-               f'\tshow={repr(self.show)},\n' \
-               ')'
+        return (
+            f"PliffyInfoABD(\n"
+            f"\tdata_a={repr(self.data_a)},\n"
+            f"\tdata_b={repr(self.data_b)},\n"
+            f"\tci_percentage={repr(self.ci_percentage)},\n"
+            f"\tdesign={repr(self.design)},\n"
+            f"\tmeasure_units={repr(self.measure_units)},\n"
+            f"\txtick_labels={repr(self.xtick_labels)},\n"
+            f"\tdecimals={repr(self.decimals)},\n"
+            f"\tplot_name={repr(self.plot_name)},\n"
+            f"\tsave={repr(self.save)},\n"
+            f"\tsave_path={repr(self.save_path)},\n"
+            f"\tsave_type={repr(self.save_type)},\n"
+            f"\tdpi={repr(self.dpi)},\n"
+            f"\tmarker={repr(self.marker)},\n"
+            f"\tmarker_color={repr(self.marker_color)},\n"
+            f"\tsummary_marker_size={repr(self.summary_marker_size)},\n"
+            f"\traw_marker_size={repr(self.raw_marker_size)},\n"
+            f"\traw_marker_transparency={repr(self.raw_marker_transparency)},\n"
+            f"\tpaired_data_joining_lines={repr(self.paired_data_joining_lines)},\n"
+            f"\tpaired_data_line_color={repr(self.paired_data_line_color)},\n"
+            f"\tpaired_line_transparency={repr(self.paired_line_transparency)},\n"
+            f"\tpaired_data_plot_raw_diff={repr(self.paired_data_plot_raw_diff)},\n"
+            f"\tci_line_width={repr(self.ci_line_width)},\n"
+            f"\tfontsize={repr(self.fontsize)},\n"
+            f"\tshow={repr(self.show)},\n"
+            ")"
+        )

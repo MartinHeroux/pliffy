@@ -26,7 +26,7 @@ def test_diff_ax_creator_paired_created_ax(pliffy_info_abd_custom_asnamedtuple):
     ab_ax = figure.FigureAB(ab_info)
     diff_ax = figure.DiffAxCreator(ab_ax, info, diff_info).diff_ax()
     assert diff_ax.get_ylim() == (-2.0, 6.0)
-    assert list(diff_ax.get_yticks()) == [-2.,  0.,  2.,  4.,  6.]
+    assert list(diff_ax.get_yticks()) == [-2.0, 0.0, 2.0, 4.0, 6.0]
 
 
 def test_diff_ax_creator_unpaired(pliffy_info_abd_custom_neg_unpaired_asnamedtuple):
@@ -45,11 +45,13 @@ def test_diff_ax_creator_unpaired(pliffy_info_abd_custom_neg_unpaired_asnamedtup
     assert diff_ax.x == 2.5
 
 
-def test_diff_ax_creator_unpaired_created_ax(pliffy_info_abd_custom_neg_unpaired_asnamedtuple):
+def test_diff_ax_creator_unpaired_created_ax(
+    pliffy_info_abd_custom_neg_unpaired_asnamedtuple,
+):
     info = pliffy_info_abd_custom_neg_unpaired_asnamedtuple
     estimates = estimate.calc_abd(info)
     save, ab_info, diff_info = parser.abd(info, estimates)
     ab_ax = figure.FigureAB(ab_info)
     diff_ax = figure.DiffAxCreator(ab_ax, info, diff_info).diff_ax()
     assert diff_ax.get_ylim() == (-60.0, 20.0)
-    assert list(diff_ax.get_yticks()) == [-60., -40., -20.,   0.,  20.]
+    assert list(diff_ax.get_yticks()) == [-60.0, -40.0, -20.0, 0.0, 20.0]

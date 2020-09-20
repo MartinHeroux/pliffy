@@ -110,6 +110,6 @@ def test_ValueError_PliffyData_unequal_length_data(
     with pytest.raises(
         estimate.UnequalLength,
         match="`PliffyInfoABD.data_a` and `PliffyInfoABD.data_b` must have the "
-              "same length in paired design.",
+        "same length in paired design.",
     ):
         estimates_diff = estimate.calc_abd(pliffy_data_unpaired_data_paired_design)

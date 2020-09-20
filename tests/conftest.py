@@ -185,7 +185,7 @@ def gen_paired_data(seed):
     random.seed(seed)
     data_a = random.choices(list(range(20, 51)), k=30)
     jitter = random.choices(list(range(0, 10)), k=30)
-    data_b = [val+jit+5 for val, jit in zip(data_a, jitter)]
+    data_b = [val + jit + 5 for val, jit in zip(data_a, jitter)]
     return data_a, data_b
 
 

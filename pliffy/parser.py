@@ -13,7 +13,6 @@ DIFF_XLIM = (0.0, 0.5)
 JITTER_RANGE = 0.1
 
 
-
 def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
     """Parse pliffy data and information to simplify plotting ABD figure"""
     jitter = _calc_jitter(info)
@@ -66,6 +65,7 @@ def _calc_jitter(info: "utils.PliffyInfoABD") -> float:
 
 class Save(NamedTuple):
     """Helper namedtuple to store save-related details"""
+
     name: str
     yes_no: Literal[True, False]
     path: Path
@@ -86,6 +86,7 @@ def _parse_save(info: "utils.PliffyInfoABD") -> Save:
 
 class Xticks(NamedTuple):
     """Helper namedtuple to store xtick details"""
+
     vals: Tuple[float, float, float] = tuple()
     labels: Tuple[str, str, str] = tuple()
 
@@ -110,6 +111,7 @@ def _raw_format(color: str, marker: str, markersize: int, alpha: float) -> dict:
 
 class Raw(NamedTuple):
     """Helper nametuple to store details for plotting raw data"""
+
     data: List[float]
     xval: float
     jitter: float
@@ -156,6 +158,7 @@ def _parse_raw_abd(info: "utils.PliffyInfoABD", jitter: float) -> Tuple[Raw, Raw
 
 class Mean(NamedTuple):
     """Helper namedtuple to store xy data and format details for mean"""
+
     data: Tuple[float, float]
     format_: dict
 
@@ -165,7 +168,9 @@ def _mean_format(color: str, marker: str, markersize: int) -> dict:
     return {"color": color, "marker": marker, "markersize": markersize}
 
 
-def _parse_mean_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") ->Tuple[Mean, Mean, Mean]:
+def _parse_mean_abd(
+    info: "utils.PliffyInfoABD", estimates: "utils.ABD"
+) -> Tuple[Mean, Mean, Mean]:
     """Parse details and data to plot mean value"""
     mean_a = Mean(
         data=(ABD_XVALS.a, estimates.a.mean),
@@ -190,6 +195,7 @@ def _parse_mean_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") ->Tuple
 
 class CI(NamedTuple):
     """Helper namedtuple to store xy data and format details for CI"""
+
     data: Tuple[Tuple[float, float], Tuple[float, float]]
     format_: dict
 
@@ -199,7 +205,9 @@ def _ci_format(color: str, linewidth: int) -> dict:
     return {"color": color, "linewidth": linewidth}
 
 
-def _parse_ci_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") -> Tuple[CI, CI, CI]:
+def _parse_ci_abd(
+    info: "utils.PliffyInfoABD", estimates: "utils.ABD"
+) -> Tuple[CI, CI, CI]:
     """Parse details and data to plot CI values"""
     ci_a = CI(
         data=((ABD_XVALS.a, ABD_XVALS.a), estimates.a.ci),
@@ -218,6 +226,7 @@ def _parse_ci_abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD") -> Tuple[
 
 class Paired(NamedTuple):
     """Helper namedtuple to store data and format details to plot paired lines"""
+
     a: List[float]
     b: List[float]
     xvals: Tuple[float, float]
@@ -247,6 +256,7 @@ def _parse_paired_lines(info: "utils.PliffyInfoABD", jitter: float) -> Paired:
 
 class FigureInfoAB(NamedTuple):
     """Helper namedtuple to hold data and details to plot AB part of figure"""
+
     raw_a: "Raw"
     raw_b: "Raw"
     mean_a: "Mean"
@@ -264,6 +274,7 @@ class FigureInfoAB(NamedTuple):
 
 class FigureInfoDiff(NamedTuple):
     """Helper namedtuple to hold data and details to plot diff part of figure"""
+
     raw_diff: "Raw"
     mean_diff: "Mean"
     plot_raw_diff: Literal[True, False]
