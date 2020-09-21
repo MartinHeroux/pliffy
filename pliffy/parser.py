@@ -28,6 +28,7 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
     ylabel = info.measure_units
     fontsize = info.fontsize
     design = info.design
+    zero_line = _parse_zero_line(info)
     show = info.show
 
     save = _parse_save(info)
@@ -53,6 +54,7 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
         plot_raw_diff=plot_raw_diff,
         ci_diff=ci_diff,
         xlim=diff_xlim,
+        zero_line=zero_line,
         show=show,
     )
     return save, ab_figure_info, diff_figure_info
@@ -255,6 +257,17 @@ def _parse_paired_lines(info: "utils.PliffyInfoABD", jitter: float) -> Paired:
     )
 
 
+class ZeroLine(NamedTuple):
+    """Helper namedtuple to store format details to plot zero line on diff plot"""
+
+    color: str = "grey"
+    width: int = 1
+
+
+def _parse_zero_line(info: "utils.PliffyInfoABD") -> ZeroLine:
+    return ZeroLine(color=info.zero_line_color, width=info.zero_line_width)
+
+
 class FigureInfoAB(NamedTuple):
     """Helper namedtuple to hold data and details to plot AB part of figure"""
 
@@ -281,4 +294,5 @@ class FigureInfoDiff(NamedTuple):
     plot_raw_diff: Literal[True, False]
     ci_diff: "CI"
     xlim: Tuple[float, float]
+    zero_line: ZeroLine
     show: Literal[True, False]

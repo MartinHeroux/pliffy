@@ -125,6 +125,8 @@ def _example4():
         ci_line_width=2,
         fontsize=12,
         show=True,
+        zero_line_width=2,
+        zero_line_color="tab:red",
     )
     plot_abd(info)
 
