@@ -94,7 +94,8 @@ class Xticks(NamedTuple):
 def _parse_xticks(info: "utils.PliffyInfoABD") -> Xticks:
     """Parse details related to xticks"""
     return Xticks(
-        vals=(ABD_XVALS.a, ABD_XVALS.b, ABD_XVALS.diff), labels=info.xtick_labels
+        vals=(ABD_XVALS.a, ABD_XVALS.b, ABD_XVALS.diff),
+        labels=(info.xtick_labels.a, info.xtick_labels.b, info.xtick_labels.diff),
     )
 
 

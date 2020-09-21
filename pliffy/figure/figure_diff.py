@@ -58,10 +58,17 @@ class FigureDiff(Figure):
             labelleft=False,
             labelright=True,
         )
+        self.ax.tick_params(
+            axis="x",
+            which="both",
+            top=False,
+            bottom=False,
+            labeltop=False,
+            labelbottom=False,
+        )
         self._remove_ax_spine("top")
         self._remove_ax_spine("bottom")
         self._remove_ax_spine("left")
-        self._set_xticks(parser.Xticks())
 
     def _save(self):
         if self.save.yes_no:

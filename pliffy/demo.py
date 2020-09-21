@@ -1,7 +1,6 @@
 from typing import NamedTuple, Union
 
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 
 from pliffy.utils import PliffyInfoABD, ABD
@@ -132,16 +131,15 @@ def _example4():
 
 def _example5():
     fig, axes = plt.subplots(nrows=4, figsize=(3, 8))
-    matplotlib.rcParams.update({"font.size": 12})
     last_subplot = len(axes) - 1
     for i, ax in enumerate(axes):
         data_specs = DataSpecs(
             sample_size_a=(i+1)*10,
             sample_size_b=(i+1)*10,
             mean_a=100,
-            mean_b=110,
-            sd_a=20,
-            sd_b=20,
+            mean_b=120,
+            sd_a=30,
+            sd_b=30,
             design="unpaired",
         )
         data_a, data_b = _gen_data(data_specs)
