@@ -26,8 +26,8 @@ class FigureAB(Figure):
     """
 
     def __init__(self, info: "parser.FigureInfoAB", ax: Subplot = None):
-        self.info = info
         matplotlib.rcParams.update({"font.size": info.fontsize})
+        self.info = info
         if ax is None:
             ax = self._make_figure_axis()
             self.show = True

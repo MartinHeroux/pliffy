@@ -16,8 +16,13 @@ class Figure:
         self.ax.set_ylim(ylim)
 
     def _set_xticks(self, xticks: "Xticks"):
-        self.ax.set_xticks(xticks.vals)
-        self.ax.set_xticklabels(xticks.labels)
+        if xticks.labels[2] == "":
+            self.ax.set_xticks(xticks.vals[:2])
+            self.ax.set_xticklabels(xticks.labels[:2])
+        else:
+            self.ax.set_xticks(xticks.vals)
+            self.ax.set_xticklabels(xticks.labels)
+
 
     def _set_yticks(self, yticks: Tuple[float]):
         self.ax.set_yticks(yticks)
