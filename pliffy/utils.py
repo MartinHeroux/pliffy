@@ -41,10 +41,10 @@ class PliffyInfoABD(NamedTuple):
     paired_data_joining_lines: Literal[True, False] = True
     paired_data_line_color: str = "gainsboro"
     paired_data_line_width: int = 1
-    paired_line_transparency: float = 0.2
+    paired_line_transparency: float = 0.3
     paired_data_plot_raw_diff: Literal[True, False] = True
     ci_line_width: int = 1
-    fontsize: int = 9
+    fontsize: int = 11
     show: Literal[True, False] = True
 
     def __repr__(self):

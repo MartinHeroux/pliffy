@@ -1,6 +1,7 @@
 from typing import NamedTuple, Union
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 
 from pliffy.utils import PliffyInfoABD, ABD
@@ -30,8 +31,8 @@ class DataSpecs(NamedTuple):
     sample_size_b: int = 30
     mean_a: float = 100
     mean_b: float = 95
-    sd_a: float = 10
-    sd_b: float = 10
+    sd_a: float = 5
+    sd_b: float = 5
     design: Union["paired", "unpaired"] = "paired"
 
 
@@ -129,12 +130,31 @@ def _example4():
     plot_abd(info)
 
 
-# fig, axes = plt.subplots(nrows=4, figsize=(3, 8))
-# last_subplot = len(axes) - 1
-# for i, ax in enumerate(axes):
-#     data_a, data_b = gen_paired_data()
-#     if i != last_subplot:
-#         info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False)
-#     else:
-#         info = PliffyInfoABD(data_a=data_a, data_b=data_b)
-#     plot_abd(info, ax)
+def _example5():
+    fig, axes = plt.subplots(nrows=4, figsize=(3, 8))
+    matplotlib.rcParams.update({"font.size": 12})
+    last_subplot = len(axes) - 1
+    for i, ax in enumerate(axes):
+        data_specs = DataSpecs(
+            sample_size_a=(i+1)*10,
+            sample_size_b=(i+1)*10,
+            mean_a=100,
+            mean_b=110,
+            sd_a=20,
+            sd_b=20,
+            design="unpaired",
+        )
+        data_a, data_b = _gen_data(data_specs)
+        if i != last_subplot:
+            info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False, fontsize=12)
+        else:
+            info = PliffyInfoABD(data_a=data_a, data_b=data_b, fontsize=12)
+        plot_abd(info, ax)
+
+
+def demo():
+    _example1()
+    _example2()
+    _example3()
+    _example4()
+    _example5()

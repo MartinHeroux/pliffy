@@ -3,3 +3,4 @@ from . import plot
 from . import utils
 from . import figure
 from . import parser
+from . import demo
