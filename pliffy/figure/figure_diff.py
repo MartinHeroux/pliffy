@@ -40,10 +40,10 @@ class FigureDiff(Figure):
         self._plot_mean_ci(self.info.mean_diff, self.info.ci_diff)
 
     def _plot_diff_raw_data(self):
-        if self._plot_raw_diff():
+        if self._plot_raw_diff_true():
             self._plot_raw_data(self.info.raw_diff)
 
-    def _plot_raw_diff(self):
+    def _plot_raw_diff_true(self):
         return (self.info.raw_diff.data is not None) and self.info.plot_raw_diff
 
     def _plot_zero_line(self):

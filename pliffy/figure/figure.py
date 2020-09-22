@@ -23,7 +23,6 @@ class Figure:
             self.ax.set_xticks(xticks.vals)
             self.ax.set_xticklabels(xticks.labels)
 
-
     def _set_yticks(self, yticks: Tuple[float]):
         self.ax.set_yticks(yticks)
 

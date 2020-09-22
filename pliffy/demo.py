@@ -7,7 +7,19 @@ from pliffy.utils import PliffyInfoABD, ABD
 from pliffy.plot import plot_abd
 
 
-def _gen_data(data_specs):
+class DataSpecs(NamedTuple):
+    """Helper namedtuple used to set parameters of data to be mocked"""
+    sample_size_a: int = 30
+    sample_size_b: int = 30
+    mean_a: float = 100
+    mean_b: float = 95
+    sd_a: float = 5
+    sd_b: float = 5
+    design: Union["paired", "unpaired"] = "paired"
+
+
+def _gen_data(data_specs: DataSpecs) -> Union[list, list]:
+    """Create mock data based on data_specs"""
     data_a = np.random.default_rng().normal(
         data_specs.mean_a, data_specs.sd_a, data_specs.sample_size_a
     )
@@ -23,16 +35,6 @@ def _gen_data(data_specs):
             data_specs.mean_b, data_specs.sd_b, data_specs.sample_size_b
         )
     return data_a, data_b
-
-
-class DataSpecs(NamedTuple):
-    sample_size_a: int = 30
-    sample_size_b: int = 30
-    mean_a: float = 100
-    mean_b: float = 95
-    sd_a: float = 5
-    sd_b: float = 5
-    design: Union["paired", "unpaired"] = "paired"
 
 
 def _example1():
@@ -136,8 +138,8 @@ def _example5():
     last_subplot = len(axes) - 1
     for i, ax in enumerate(axes):
         data_specs = DataSpecs(
-            sample_size_a=(i+1)*10,
-            sample_size_b=(i+1)*10,
+            sample_size_a=(i + 1) * 10,
+            sample_size_b=(i + 1) * 10,
             mean_a=100,
             mean_b=120,
             sd_a=30,
@@ -145,12 +147,15 @@ def _example5():
             design="unpaired",
         )
         data_a, data_b = _gen_data(data_specs)
-        show = i == last_subplot
-        info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=show, fontsize=12)
+        if i != last_subplot:
+            info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False, fontsize=12)
+        else:
+            info = PliffyInfoABD(data_a=data_a, data_b=data_b, fontsize=12)
         plot_abd(info, ax)
 
 
 def demo():
+    """Generate five different demo plots"""
     _example1()
     _example2()
     _example3()
