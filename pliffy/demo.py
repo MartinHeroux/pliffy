@@ -37,14 +37,14 @@ def _gen_data(data_specs: DataSpecs) -> Union[list, list]:
     return data_a, data_b
 
 
-def _example1():
+def _example1(show=True):
     data_specs = DataSpecs()
     data_a, data_b = _gen_data(data_specs)
-    info = PliffyInfoABD(data_a=data_b, data_b=data_a, design="paired")
+    info = PliffyInfoABD(data_a=data_b, data_b=data_a, design="paired", show=show)
     plot_abd(info)
 
 
-def _example2():
+def _example2(show=True):
     data_specs = DataSpecs(
         sample_size_a=50,
         sample_size_b=10,
@@ -67,11 +67,12 @@ def _example2():
         marker=ABD(a="s", b="s", diff="^"),
         marker_color=ABD(a="tab:blue", b="tab:red", diff="tab:green"),
         fontsize=12,
+        show=show,
     )
     plot_abd(info)
 
 
-def _example3():
+def _example3(show=True):
     data_specs = DataSpecs(
         sample_size_a=70,
         sample_size_b=10,
@@ -95,11 +96,12 @@ def _example3():
         raw_marker_size=ABD(a=3, b=3, diff=3),
         raw_marker_transparency=0.8,
         fontsize=10,
+        show=show,
     )
     plot_abd(info)
 
 
-def _example4():
+def _example4(show=True):
     data_specs = DataSpecs(
         sample_size_a=10,
         sample_size_b=10,
@@ -126,14 +128,14 @@ def _example4():
         paired_data_plot_raw_diff=True,
         ci_line_width=2,
         fontsize=12,
-        show=True,
+        show=show,
         zero_line_width=2,
         zero_line_color="tab:red",
     )
     plot_abd(info)
 
 
-def _example5():
+def _example5(show=True):
     fig, axes = plt.subplots(nrows=4, figsize=(3, 8))
     last_subplot = len(axes) - 1
     for i, ax in enumerate(axes):
@@ -150,7 +152,7 @@ def _example5():
         if i != last_subplot:
             info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False, fontsize=12)
         else:
-            info = PliffyInfoABD(data_a=data_a, data_b=data_b, fontsize=12)
+            info = PliffyInfoABD(data_a=data_a, data_b=data_b,  show=show, fontsize=12)
         plot_abd(info, ax)
 
 
