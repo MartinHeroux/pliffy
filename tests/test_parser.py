@@ -1,10 +1,10 @@
 from pliffy.parser import abd
 from pliffy.utils import ABD
-from pliffy.parser import Raw, CI, Xticks, Mean, Paired
+from pliffy.parser import Raw, CI, Xticks, Mean, Paired, ZeroLine
 
 
 def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
-    save, _, _ = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)
+    save = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)[0]
     expected = {
         "name": "arm",
         "yes_no": True,
@@ -15,8 +15,8 @@ def test_abd_save(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
     assert save._asdict() == expected
 
 
-def test_abd_abd_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
-    _, abd_figure_info, _ = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)
+def test_abd_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
+    abd_figure_info = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)[1]
     assert abd_figure_info._asdict() == {
         "raw_a": Raw(
             data=[1, 2, 3, 4, 5],
@@ -73,7 +73,7 @@ def test_abd_abd_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimat
 
 
 def test_abd_diff_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
-    _, _, diff_figure_info = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)
+    diff_figure_info = abd(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates)[2]
     assert diff_figure_info._asdict() == {
         "raw_diff": Raw(
             data=[0, 2, 3, 3, 4],
@@ -98,4 +98,5 @@ def test_abd_diff_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estima
         ),
         "xlim": (0.0, 0.5),
         "show": False,
+        'zero_line': ZeroLine(color='grey', width=1),
     }

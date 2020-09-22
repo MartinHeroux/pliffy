@@ -145,10 +145,8 @@ def _example5():
             design="unpaired",
         )
         data_a, data_b = _gen_data(data_specs)
-        if i != last_subplot:
-            info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=False, fontsize=12)
-        else:
-            info = PliffyInfoABD(data_a=data_a, data_b=data_b, fontsize=12)
+        show = i == last_subplot
+        info = PliffyInfoABD(data_a=data_a, data_b=data_b, show=show, fontsize=12)
         plot_abd(info, ax)
 
 

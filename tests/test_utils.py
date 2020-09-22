@@ -53,5 +53,7 @@ def test_pliffy_info_set_data(pliffy_info_abd_custom_asdict):
         ci_line_width=2,
         fontsize=12,
         show=False,
+        zero_line_color="grey",
+        zero_line_width=1,
     )
     assert actual._asdict() == pliffy_info_abd_custom_asdict

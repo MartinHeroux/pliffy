@@ -84,11 +84,13 @@ def pliffy_info_abd_default_asdict():
         "paired_data_joining_lines": True,
         "paired_data_line_color": "gainsboro",
         "paired_data_line_width": 1,
-        "paired_line_transparency": 0.2,
+        "paired_line_transparency": 0.3,
         "paired_data_plot_raw_diff": True,
         "ci_line_width": 1,
-        "fontsize": 9,
+        "fontsize": 11,
         "show": True,
+        "zero_line_color": "grey",
+        "zero_line_width": 1,
     }
 
 
@@ -119,6 +121,8 @@ def _pliffy_info_abd_custom():
         "ci_line_width": 2,
         "fontsize": 12,
         "show": False,
+        "zero_line_color": "grey",
+        "zero_line_width": 1,
     }
 
 
@@ -159,6 +163,8 @@ def _pliffy_info_abd_custom_neg_unpaired():
         "ci_line_width": 2,
         "fontsize": 12,
         "show": False,
+        "zero_line_color": "grey",
+        "zero_line_width": 1,
     }
 
 
