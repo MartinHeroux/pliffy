@@ -56,7 +56,8 @@ def _make_estimates_table(estimates: ABD, info: "utils.PliffyInfoABD") -> str:
     results = list()
     for estimate, name in zip(estimates, info.xtick_labels):
         results.append(
-            f"{name:<12s}{estimate.mean:>16.{info.decimals}f}{estimate.ci[0]:>15.{info.decimals}f} to {estimate.ci[1]:<15.{info.decimals}f}"
+            f"{name:<12s}{estimate.mean:>16.{info.decimals}f}"
+            f"{estimate.ci[0]:>15.{info.decimals}f} to {estimate.ci[1]:<15.{info.decimals}f}"
         )
     return "\n".join(header + results + [markers])
 
