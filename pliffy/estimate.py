@@ -157,5 +157,4 @@ def _calc_paired_diffs(info: "utils.PliffyInfoABD"):
 
 class UnequalLength(Exception):
     """Custom exception for paired analysis when data_a/data_b not same length"""
-
     pass

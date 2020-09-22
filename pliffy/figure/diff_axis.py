@@ -25,7 +25,7 @@ class DiffAxCreator:
     -----
     diff axis is create by specifying x, y, width, height.
         - x, y: coordinates of the bottom-left corner of the diff axis
-        - width, height: Of the diff axis, where the origin is x, y
+        - width, height: Size of diff axis, where the origin is x, y
 
     Because we create the diff axis in data coordinates of the main ab_axis,
     (transform=self.ax_ab.transData), `x, y, width, height` must all be specified
@@ -55,8 +55,10 @@ class DiffAxCreator:
     def _min_diff(self) -> float:
         """Determine lowest value on diff plot
 
-        This value could come from the lowest single raw value difference if raw
-        differences are plotted, or it could come from the lower value of the CI """
+        This value could be the lowest single raw value difference if raw
+        differences are plotted, or the lowest value of the CI
+
+        """
 
         if self._true_false_plot_raw_diff():
             return min(self.diff_fig_info.raw_diff.data)
@@ -66,8 +68,10 @@ class DiffAxCreator:
     def _max_diff(self) -> float:
         """Determine highest value on diff plot
 
-        This value could come from the highest single raw value difference if raw
-        differences are plotted, or it could come from the higher value of the CI """
+        This value could be the highest single raw value difference if raw
+        differences are plotted, or the highest value of the CI
+
+        """
 
         if self._true_false_plot_raw_diff():
             return max(self.diff_fig_info.raw_diff.data)

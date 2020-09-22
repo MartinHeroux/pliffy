@@ -39,7 +39,7 @@ class FigureAB(Figure):
 
     def _make_figure_axis(self) -> Subplot:
         width_height_in_inches = WIDTH_HEIGHT_IN_INCHES
-        _, ax = plt.subplots(figsize=width_height_in_inches)
+        ax = plt.subplots(figsize=width_height_in_inches)[1]
         return ax
 
     def _min_raw_data(self) -> float:
