@@ -7,9 +7,9 @@
     [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 [![Documentation Status](https://readthedocs.org/projects/spike2py/badge/?version=latest)](https://pliffy.readthedocs.io/en/latest/?badge=latest)
 
-**pliffy** makes difference plots. These plots are simple and informative. At present, **pliffy** makes difference plots from two independent groups (e.g. treatment *vs* control) or two measurements made in the same group (e.g. pre-treatment *vs* post-treatment). All raw data points are plotted by default, and data is summarised with the mean and confidence interval. The confidence interval is calculated using the appropriate *t*-distribution and is set to 95% by default.
+**pliffy** makes difference plots, plots that are simple and informative. At present, **pliffy** makes difference plots for two independent groups (e.g. treatment *vs* control) or for two measurements made in the same group (e.g. pre-treatment *vs* post-treatment). All raw data points are plotted by default, and data is summarised with the mean and confidence interval. The confidence interval is calculated using the appropriate *t*-distribution and is set to 95% by default.
 
-**pliffy** plots are simple to generate. The simplest **pliffy** plot only requires two inputs, `data_a` and `data_b`. Because these two datasets (**a** and **b**) are used to compute the **d**ifference, these plots are referred to `abd` plots. For example, lets imagine we already have our two datasets loaded:
+**pliffy** plots are simple to generate. The simplest **pliffy** plot requires only two inputs, `data_a` and `data_b`. Because these two datasets (**a** and **b**) are used to compute the **d**ifference, these plots are referred to as `abd` plots. For example, with our two datasets already loaded:
 
 ```python
 >>> from pliffy import PliffyInfoABD, plot_abd
@@ -22,11 +22,11 @@
 
 ## Documentation
 
-Introductory tutorials, how-to's and other useful documentation are available on [Read the Docs](https://spike2py.readthedocs.io/en/latest/index.html)
+Introductory tutorials, how-to's and other useful documentation are available on [Read the Docs](https://pliffy.readthedocs.io/en/latest/index.html)
 
 ## Installing
 
-**spike2py** is available on PyPI:
+**pliffy** is available on PyPI:
 
 ```console
 $ python -m pip install pliffy
