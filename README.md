@@ -1,4 +1,4 @@
-[![pliffy](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/pliffy_650x200.png)](https://github.com/MartinHeroux/pliffy)
+[![pliffy](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/pliffy_650x200.png?token=AC4RI3BYZMMMZGSXOOYVJAS7ORXCU)](https://github.com/MartinHeroux/pliffy)
 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
