@@ -1,8 +1,21 @@
 Reference Guide
 ===============
 
-.. module:: pliffy.estimate
+.. module:: pliffy.plot
 
-estimate.abd
-~~~~~~~~~~~~
+pliffy.plot_abd
+~~~~~~~~~~~~~~~
+
+.. autofunction:: plot_abd
+
+.. module:: pliffy.utils
+
+pliffy.PliffyInfoABD
+~~~~~~~~~~~~~~~~~~~~
+
+.. autoclass:: PliffyInfoABD
+
+pliffy.ABD
+~~~~~~~~~~
+.. autoclass:: ABD
 
