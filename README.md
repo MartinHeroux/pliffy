@@ -17,7 +17,7 @@
 >>> plot_abd(info)
 ```
 
-[![pliffy_example_1](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/readme_example1.png?token=AC4RI3B3RCVI5ISCOWKSFJK7ORYUI)](https://github.com/MartinHeroux/pliffy)
+[![pliffy_example_1](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/readme_example1.png?token=AC4RI3A6YTE6E53FO4FJ5227ORZ3Q)](https://github.com/MartinHeroux/pliffy)
 
 
 ## Documentation
