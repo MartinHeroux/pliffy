@@ -1,4 +1,4 @@
-[![pliffy](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/pliffy_650x200.png)](https://github.com/MartinHeroux/pliffy)
+[![pliffy](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/pliffy_650x200.png?token=AC4RI3BYZMMMZGSXOOYVJAS7ORXCU)](https://github.com/MartinHeroux/pliffy)
 
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
@@ -17,7 +17,7 @@
 >>> plot_abd(info)
 ```
 
-[![pliffy_example_1](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/readme_example1.png)](https://github.com/MartinHeroux/pliffy)
+[![pliffy_example_1](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/readme_example1.png?token=AC4RI3BFIWZ4VF6F7X37A7S7ORXI2)](https://github.com/MartinHeroux/pliffy)
 
 
 ## Documentation

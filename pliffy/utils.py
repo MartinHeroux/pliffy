@@ -5,7 +5,15 @@ from pliffy import estimate
 
 
 class ABD(NamedTuple):
-    """Helper namedtuple"""
+    """Namedtuple to store info/data for `a`, `b`, `diff`
+
+    Examples
+    --------
+
+    >>> xtick_labels=ABD(a='a', b='b', diff='diff')
+    >>> marker=ABD(a='o', b='o', diff='^')
+
+    """
 
     a: Union[str, int, float, "estimate.Estimates"] = None
     b: Union[str, int, float, "estimate.Estimates"] = None
@@ -18,7 +26,67 @@ class ABD(NamedTuple):
 class PliffyInfoABD(NamedTuple):
     """Information used to generate ABD plot
 
-    Sensible defaults reduce need for user input
+    `data_a` and `data_b` are the only two required parameters. Other values will be set
+    to default values if not specified.
+
+    Parameters
+    ----------
+    data_a: list = None
+        Data to be plotted and used to compute difference
+    data_b: list = None
+        Data to be plotted and used to compute difference
+    ci_percentage: int = 95
+        Value used to compute confidence intervals
+    design: Literal["paired", "unpaired"] = "unpaired"
+        Specify whether `data_a` and `data_b` are paired or unpaired
+    measure_units: str = "Amplitude (a.u.)"
+        Label applied to left y-axis
+    xtick_labels: ABD = ABD(a="a", b="b", diff="diff")
+        Labels applied for `data_a`, `data_b` and `diff`. If `diff=""`, tick will be removed
+    decimals: int = 2
+        Precision with which to report estimates printed to console
+    plot_name: str = "figure"
+        Name given to plot when saved
+    save: Literal[True, False] = False
+        Flag whether or not to save figure
+    save_path: Path = None
+        Path where to save figure
+    save_type: Literal["png", "svg", "pdf"] = "png"
+        What type of figure to save
+    dpi: int = 180
+        If bitmap format, what dpi to use
+    marker: ABD = ABD(a="o", b="o", diff="^")
+        Marker style to use for plotted data (raw and summary)
+    marker_color: ABD = ABD(a="black", b="black", diff="black")
+        Color of plotted markers
+    summary_marker_size: ABD = ABD(a=5, b=5, diff=6)
+        Size of markers for mean values
+    raw_marker_size: ABD = ABD(a=3, b=3, diff=3)
+        Size of markers for raw data
+    raw_marker_transparency: float = 0.2
+        Transparency of raw data markers, value between 0.1 (very transparent) to 1 (opaque)
+    paired_data_joining_lines: Literal[True, False] = True
+        Indicate whether or not to plot joining lines between paired raw data points.
+        If `False`, raw data points plotted
+    paired_data_line_color: str = "gainsboro"
+        Color of paired joining lines
+    paired_data_line_width: int = 1
+        Width of paired joining lines
+    paired_line_transparency: float = 0.3
+        Transparency of paired joining lines
+    paired_data_plot_raw_diff: Literal[True, False] = True
+        Indicate whether or not to plot raw difference values
+    ci_line_width: int = 1
+        Width of confidence interval error bars
+    fontsize: int = 11
+        Font of all labels and tick-values
+    zero_line_color: str = "grey"
+        Color of dotted line indicating zero on the floating difference axis
+    zero_line_width: int = 1
+        Width of zero line
+    show: Literal[True, False] = True
+        Indicate whether or not to show plot after generation. Set to `False` if want to save but
+        not show figure. Also set to `False` if current figure is a subplot of a larger figure
     """
 
     data_a: list = None

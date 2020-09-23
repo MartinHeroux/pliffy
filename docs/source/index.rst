@@ -1,13 +1,12 @@
-.. image:: ./img/pliffy_600x300.png
-   :width: 400
+.. image:: ./img/pliffy_650x200.png
+   :width: 650
    :align: center
 
 .. include:: pages/homepage.rst
 
-
 First Steps
 ===========
-The first thing to do is install pliffy and make sure it's working properly.
+The first thing to do is install **pliffy** and make sure it's working properly.
 
 .. toctree::
    :maxdepth: 1
@@ -16,7 +15,7 @@ The first thing to do is install pliffy and make sure it's working properly.
 
 Tutorial
 ========
-If this is your first time using pliffy, it is recommended that you work through the tutorial.
+If this is your first time using **pliffy**, it is recommended that you work through the tutorial.
 
 .. toctree::
    :maxdepth: 1
