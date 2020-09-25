@@ -28,7 +28,7 @@ To generate our **pliffy** plot, we simply have to pass `info` to `plot_abd`.
     >>> plot_abd(info)
 
 
-.. image:: ../img/tutorial2.png
+.. image:: ../img/tutorial1.png
    :width: 300
    :align: center
 
