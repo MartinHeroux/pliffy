@@ -107,3 +107,52 @@ That looks pretty good. But what if we want to prepare a publication-quality fig
 .. image:: ../img/how_to_subplots2.png
    :width: 250
    :align: center
+
+Run the pliffy test suite
+-------------------------
+In order to run the **pliffy** test suite, you will have to get the full **pliffy** from
+`GitHub`_. You will also need to ensure you have the various requirements need to run **pliffy**, pytest, and the `pytest-mpl`_ plugin for pytest. All these packages and plugins are available on Pypi can can be installed using pip.
+
+`pytest-mpl` is a plugin that can be used to test figures that are generated with `matplotlib`_.
+
+To run the full suite of tests, run the following command from the root directory of the **pliffy** package:
+
+.. code-block:: shell
+
+    $ pytest --mpl
+
+Add tests to **pliffy**
+-------------------------
+If you have added some features to **pliffy**, please add tests that cover the new code.
+
+All test file are located in the `tests` folder in the root directory of the **pliffy** package.
+
+If your new feature was added to an existing modules, please add your tests to the file named `test_<module_name>.py`. For example, if you added something to the `utils.py` module, your test(s) should go in `test_utils.py`.
+
+Any new fixtures can be added to the `conftest.py` file.
+
+If your test generates a new figure, please follow the instructions in the `README.md`_ file of pytest-mpl. Briefly, create a test that generates a figure and return it. In most cases, you will need to return `plt.gcf()`. For example, here is the first test from `test_figure_diff.py`:
+
+.. code-block:: python
+
+    @pytest.mark.mpl_image_compare(
+        savefig_kwargs={"dpi": 600}, baseline_dir=str(Path(".") / "baseline")
+    )
+    def test_example1(pliffy_info_example1):
+        plot_abd(pliffy_info_example1)
+        return plt.gcf()
+
+After adding your new test, you will need to run the following command:
+
+.. code-block::
+
+    $ pytest --mpl-generate-path=tests/baseline
+
+This assumes you are running this command from the root directory of the **pliffy** package.
+It will generate and save the figure in the `baseline` directory. This is where all reference figures used to test **pliffy** are stored.
+
+
+.. _GitHub: https://github.com/MartinHeroux/pliffy
+.. _pytest-mpl: https://pypi.org/project/pytest-mpl/
+.. _matplotlib: https://matplotlib.org/
+.. _README.md: https://github.com/matplotlib/pytest-mpl
