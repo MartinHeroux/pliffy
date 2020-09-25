@@ -1,5 +1,3 @@
-.. _tutorial:
-
 Tutorial
 ========
 
@@ -36,6 +34,18 @@ To generate our **pliffy** plot, we simply have to pass `info` to `plot_abd`.
 
 The above figure is the default **pliffy** style. It assumes that `data_a` and `data_b` are independent and the confidence intervals are all 95%.
 
+**pliffy** also prints the results to our Python console:
+
+.. code-block:: Python
+
+    --------------------------------------------------------------
+    outcome                 mean              95% CI
+    --------------------------------------------------------------
+    a                       42.63          32.17 to 56.72
+    b                       61.94          54.33 to 79.93
+    diff                    20.26          16.02 to 26.87
+    --------------------------------------------------------------
+
 What if our data was paired?
 
 Part 3. Generate pliffy plot for dependent (paired) observations
@@ -64,7 +74,7 @@ Great, but the data actual reflect the distance ants can walk in 30s when they a
 	        design='paired',
 	        measure_units='Distance (cm)',
 	        xtick_labels=ABD(a='Paper', b='Cardboard', diff='Effect')
-       )
+            )
     >>> plot_abd(info)
 
 
@@ -107,9 +117,10 @@ What if we want some additional control of our **pliffy** plots? While **pliffy*
             zero_line_color='grey',
             zero_line_width=1,
             show=True,
-        )
+            width_height_in_inches=(3.23, 3.23),
+            )
 
-Wow! That is a lot of options. But don't get overwhelmed. The best way to learn what these parameters do is to look them up in this table. Alternatively, we can simply change some of the values and see what we get. For example:
+Wow! That is a lot of options. But don't get overwhelmed. The best way to learn what these parameters do is to look them up in the reference guides (:ref:`PliffyInfoABD`). Alternatively, we can simply change some of the values and see what we get. For example:
 
 .. code-block:: python
 
@@ -129,7 +140,7 @@ Wow! That is a lot of options. But don't get overwhelmed. The best way to learn 
             fontsize=6,
             zero_line_color='tab:red',
             zero_line_width=2,
-        )
+            )
     >>> plot_abd(info)
 
 .. image:: ../img/tutorial4.png

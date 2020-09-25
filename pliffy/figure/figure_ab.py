@@ -9,7 +9,6 @@ from pliffy.figure import Figure
 from pliffy import parser
 
 
-WIDTH_HEIGHT_IN_INCHES = (8.2 / 2.54, 8.2 / 2.54)
 EXTRA_Y_TICKS = 3
 
 
@@ -38,7 +37,7 @@ class FigureAB(Figure):
         self.ytick_step, self.yticks = self._tweak_yaxis()
 
     def _make_figure_axis(self) -> Subplot:
-        width_height_in_inches = WIDTH_HEIGHT_IN_INCHES
+        width_height_in_inches = self.info.width_height_in_inches
         ax = plt.subplots(figsize=width_height_in_inches)[1]
         return ax
 

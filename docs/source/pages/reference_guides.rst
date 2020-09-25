@@ -10,6 +10,8 @@ pliffy.plot_abd
 
 .. module:: pliffy.utils
 
+.. _PliffyInfoABD:
+
 pliffy.PliffyInfoABD
 ~~~~~~~~~~~~~~~~~~~~
 

@@ -19,7 +19,6 @@
 
 [![pliffy_example_1](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/readme_example1.png?token=AC4RI3CH6G325YGVOFTMYXC7OR2PG)](https://github.com/MartinHeroux/pliffy)
 
-
 ## Documentation
 
 Introductory tutorials, how-to's and other useful documentation are available on [Read the Docs](https://pliffy.readthedocs.io/en/latest/index.html)

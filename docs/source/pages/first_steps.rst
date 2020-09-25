@@ -6,7 +6,7 @@ Installation
 Create a virtual environment
 ----------------------------
 
-pliffy works with `Python 3.8 or above`_. It is recommended you create a dedicated `Python environment`_ before you install pliffy. In your project directory, run the following commands:
+**pliffy** works with `Python 3.8 or above`_. It is recommended you create a dedicated `Python environment`_ before you install **pliffy**. In your project directory, run the following commands:
 
 .. code-block:: bash
 
@@ -43,7 +43,9 @@ With your virtual environment activated, start Python and type the following:
 .. code-block:: python
 
     >>> import pliffy
-    >>> spike2py.demo()
+    >>> pliffy.demo.demo()
+
+If you did everything correctly, you should see a series of four **pliffy** figures.
 
 .. _Python 3.8 or above: https://www.python.org/downloads/
 .. _Python environment: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment

@@ -1,4 +1,4 @@
-from typing import NamedTuple, Union, Literal
+from typing import NamedTuple, Union, Literal, Tuple
 from pathlib import Path
 
 from pliffy import estimate
@@ -87,6 +87,9 @@ class PliffyInfoABD(NamedTuple):
     show: Literal[True, False] = True
         Indicate whether or not to show plot after generation. Set to `False` if want to save but
         not show figure. Also set to `False` if current figure is a subplot of a larger figure
+    width_height_in_inches: Tuple[float, float] = (8.2, 8.2)
+        Width and height of pliffy plot (in inches). Default is set to a one-column figure in
+        a two-column journal format
     """
 
     data_a: list = None
@@ -116,6 +119,7 @@ class PliffyInfoABD(NamedTuple):
     zero_line_color: str = "grey"
     zero_line_width: int = 1
     show: Literal[True, False] = True
+    width_height_in_inches: Tuple[float, float] = (3.23, 3.23)
 
     def __repr__(self):
         return (
@@ -146,5 +150,6 @@ class PliffyInfoABD(NamedTuple):
             f"\tzero_line_color={repr(self.zero_line_color)},\n"
             f"\tzero_line_width={repr(self.zero_line_width)},\n"
             f"\tshow={repr(self.show)},\n"
+            f"\twidth_height_in_inches={repr(self.width_height_in_inches)},\n"
             ")"
         )

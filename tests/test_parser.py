@@ -69,6 +69,7 @@ def test_abd_figure_info(pliffy_info_abd_custom_asnamedtuple, pliffy_estimates):
         "ylabel": "Amplitude (Volts)",
         "design": "paired",
         "fontsize": 12,
+        "width_height_in_inches": (3.23, 3.23),
     }
 
 
