@@ -30,6 +30,7 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
     design = info.design
     zero_line = _parse_zero_line(info)
     show = info.show
+    width_height_in_inches = info.width_height_in_inches
 
     save = _parse_save(info)
 
@@ -47,6 +48,7 @@ def abd(info: "utils.PliffyInfoABD", estimates: "utils.ABD"):
         ylabel=ylabel,
         design=design,
         fontsize=fontsize,
+        width_height_in_inches=width_height_in_inches,
     )
     diff_figure_info = FigureInfoDiff(
         raw_diff=raw_diff,
@@ -284,6 +286,7 @@ class FigureInfoAB(NamedTuple):
     ylabel: str
     design: Literal["paired", "unpaired"]
     fontsize: int
+    width_height_in_inches: Tuple[float, float]
 
 
 class FigureInfoDiff(NamedTuple):

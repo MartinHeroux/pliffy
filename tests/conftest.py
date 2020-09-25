@@ -91,6 +91,7 @@ def pliffy_info_abd_default_asdict():
         "show": True,
         "zero_line_color": "grey",
         "zero_line_width": 1,
+        "width_height_in_inches": (3.23, 3.23),
     }
 
 
@@ -123,6 +124,7 @@ def _pliffy_info_abd_custom():
         "show": False,
         "zero_line_color": "grey",
         "zero_line_width": 1,
+        "width_height_in_inches": (3.23, 3.23),
     }
 
 
@@ -165,6 +167,7 @@ def _pliffy_info_abd_custom_neg_unpaired():
         "show": False,
         "zero_line_color": "grey",
         "zero_line_width": 1,
+        "width_height_in_inches": (3.23, 3.23),
     }
 
 

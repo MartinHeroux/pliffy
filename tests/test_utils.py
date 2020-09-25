@@ -55,5 +55,6 @@ def test_pliffy_info_set_data(pliffy_info_abd_custom_asdict):
         show=False,
         zero_line_color="grey",
         zero_line_width=1,
+        width_height_in_inches=(3.23, 3.23),
     )
     assert actual._asdict() == pliffy_info_abd_custom_asdict
