@@ -40,7 +40,7 @@ def _gen_data(data_specs: DataSpecs) -> Union[list, list]:
 def _example1():
     data_specs = DataSpecs()
     data_a, data_b = _gen_data(data_specs)
-    info = PliffyInfoABD(data_a=data_b, data_b=data_a, design="paired", show=show)
+    info = PliffyInfoABD(data_a=data_b, data_b=data_a, design="paired")
     plot_abd(info)
 
 
