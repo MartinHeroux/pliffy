@@ -5,7 +5,7 @@ Save figure
 -----------
 To save a **pliffy** plot, we have to specify a minimum of three things in `PliffyInfoABD`:
 
-    - `figure_name`
+    - `plot_name`
     - `save`
     - `save_path`
 
@@ -21,7 +21,7 @@ For example:
     >>> data_b = data[30:]
     >>> info = PliffyInfoABD(data_a=data_a,
                              data_b=data_b,
-                             figure_name='great_figure',
+                             plot_name='great_figure',
                              save=True,
                              save_path='/home/martin/Desktop/'
                              )
@@ -35,7 +35,7 @@ These can easily be changed:
 
     >>> info = PliffyInfoABD(data_a=data_a,
                              data_b=data_b,
-                             figure_name='great_figure',
+                             plot_name='great_figure',
                              save=True,
                              save_path='/home/martin/Desktop/',
                              dpi=300,
@@ -49,7 +49,7 @@ Alternatively, we may want to save our plot to a vector-based format, like `svg`
 
     >>> info_pdf = PliffyInfoABD(data_a=data_a,
                               data_b=data_b,
-                              figure_name='great_figure_pdf',
+                              plot_name='great_figure_pdf',
                               save=True,
                               save_path='/home/martin/Desktop/',
                               save_type='pdf',
@@ -57,7 +57,7 @@ Alternatively, we may want to save our plot to a vector-based format, like `svg`
     >>> plot_abd(info_pdf)
     >>> info_svg = PliffyInfoABD(data_a=data_a,
                               data_b=data_b,
-                              figure_name='great_figure_svg',
+                              plot_name='great_figure_svg',
                               save=True,
                               save_path='/home/martin/Desktop/',
                               save_type='svg',
@@ -127,7 +127,7 @@ If you have added some features to **pliffy**, please add tests that cover the n
 
 All test file are located in the `tests` folder in the root directory of the **pliffy** package.
 
-If your new feature was added to an existing modules, please add your tests to the file named `test_<module_name>.py`. For example, if you added something to the `utils.py` module, your test(s) should go in `test_utils.py`.
+If your new feature was added to an existing module, please add your tests to the file named `test_<module_name>.py`. For example, if you added something to the `utils.py` module, your test(s) should go in `test_utils.py`.
 
 Any new fixtures can be added to the `conftest.py` file.
 
@@ -144,7 +144,7 @@ If your test generates a new figure, please follow the instructions in the `READ
 
 After adding your new test, you will need to run the following command:
 
-.. code-block::
+.. code-block:: python
 
     $ pytest --mpl-generate-path=tests/baseline
 

@@ -9,7 +9,7 @@ It is hoped that this revised version of **pliffy** can help students and resear
 
 Alternatives to pliffy
 ----------------------
-**pliffy** plots were inspired by the work of `Geoff Cumming`_. Geoff's originally generated his difference plots in Excel with the help of macros, a framework he called ESCI. Since then, his co-author `Robert Calin-Jageman`_ has published this statistical estimation-based framework in R as the `ESCI module`_ for `Jamovi`_.
+**pliffy** plots were inspired by the work of `Geoff Cumming`_. Geoff originally generated his difference plots in Excel with the help of macros, a framework he called ESCI. Since then, his co-author `Robert Calin-Jageman`_ has published this statistical estimation-based framework in R as the `ESCI module`_ for `Jamovi`_.
 
 The other alternative is to **pliffy** is `DABEST-python`_. As stated in the README.md, DABEST stands for Data Analysis using Bootstrap-Coupled ESTimation. It offers a wider variety of difference plots, all based on bootstap estimates.
 

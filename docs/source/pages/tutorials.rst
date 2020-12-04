@@ -46,7 +46,7 @@ The above figure is the default **pliffy** style. It assumes that `data_a` and `
     diff                    20.26          16.02 to 26.87
     --------------------------------------------------------------
 
-What if our data was paired?
+What if our data were paired?
 
 Part 3. Generate pliffy plot for dependent (paired) observations
 ----------------------------------------------------------------
@@ -63,7 +63,7 @@ First we will create a new version of `data_b` that is dependent or related to `
    :width: 300
    :align: center
 
-Great, but the data actual reflect the distance ants can walk in 30s when they are carrying a piece of paper or a piece of cardboard. Lets add these details to the x-axis and y-axis labels top make our plot more informative. To do this, we will have to import `ABD` from **pliffy**.
+Great, but the data actual reflect the distance ants can walk in 30s when they are carrying a piece of paper or a piece of cardboard. Let's add these details to the x-axis and y-axis labels to make our plot more informative. To do this, we will have to import `ABD` from **pliffy**.
 
 .. code-block:: python
 
