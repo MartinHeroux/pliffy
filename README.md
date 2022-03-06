@@ -1,6 +1,6 @@
 [![pliffy](https://raw.githubusercontent.com/MartinHeroux/pliffy/master/docs/source/img/pliffy_650x200.png?token=AC4RI3BYZMMMZGSXOOYVJAS7ORXCU)](https://github.com/MartinHeroux/pliffy)
 
-
+[![DOI](https://zenodo.org/badge/289898585.svg)](https://zenodo.org/badge/latestdoi/289898585)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![coverage](https://img.shields.io/badge/coverage-98%25-yellowgreen)
