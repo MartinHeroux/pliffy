@@ -1,7 +1,6 @@
 from typing import Literal, Tuple
 
 import numpy as np
-from matplotlib.axes._subplots import Subplot
 
 from pliffy import utils, parser
 
@@ -35,7 +34,7 @@ class DiffAxCreator:
 
     def __init__(
         self,
-        parent_figure: Subplot,
+        parent_figure,
         pliffy_info: "utils.PliffyInfoABD",
         diff_fig_info: "parser.FigureInfoDiff",
     ):
@@ -111,7 +110,7 @@ class DiffAxCreator:
     def _calc_diff_height(self) -> float:
         return self.yticks[-1] - self.yticks[0]
 
-    def diff_ax(self) -> Subplot:
+    def diff_ax(self):
         """Create and format Matplotlib axis object for difference axis"""
         diff_ax = self.parent_figure.ax.inset_axes(
             [self.x, self.y, self.width, self.height],

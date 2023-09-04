@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="pliffy",
-    version="0.1.3",
+    version="0.1.4",
     description="Plotting differences with Python",
     long_description=README,
     long_description_content_type="text/markdown",

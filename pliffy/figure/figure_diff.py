@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-from matplotlib.axes._subplots import Subplot
 
 from pliffy.figure import Figure
 from pliffy import parser
@@ -21,7 +20,7 @@ class FigureDiff(Figure):
 
     """
 
-    def __init__(self, info: "parser.FigureInfoDiff", ax: Subplot, save: "parser.Save"):
+    def __init__(self, info: "parser.FigureInfoDiff", ax, save: "parser.Save"):
         self.info = info
         self.ax = ax
         self.save = save

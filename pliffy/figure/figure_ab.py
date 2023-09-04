@@ -3,7 +3,6 @@ from typing import Literal, Tuple
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.axes._subplots import Subplot
 
 from pliffy.figure import Figure
 from pliffy import parser
@@ -24,7 +23,7 @@ class FigureAB(Figure):
 
     """
 
-    def __init__(self, info: "parser.FigureInfoAB", ax: Subplot = None):
+    def __init__(self, info: "parser.FigureInfoAB", ax=None):
         matplotlib.rcParams.update({"font.size": info.fontsize})
         self.info = info
         if ax is None:
@@ -36,7 +35,7 @@ class FigureAB(Figure):
         self._plot()
         self.ytick_step, self.yticks = self._tweak_yaxis()
 
-    def _make_figure_axis(self) -> Subplot:
+    def _make_figure_axis(self):
         width_height_in_inches = self.info.width_height_in_inches
         ax = plt.subplots(figsize=width_height_in_inches)[1]
         return ax
